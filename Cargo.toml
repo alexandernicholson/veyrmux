@@ -1,0 +1,62 @@
+[workspace]
+members = ["."]
+resolver = "2"
+
+[workspace.package]
+authors = ["Alexander Nicholson"]
+license = "MIT"
+repository = "https://github.com/alexandernicholson/veyrmux"
+rust-version = "1.89"
+edition = "2024"
+
+[package]
+name = "veyrmux"
+version = "0.1.0"
+description = "Safe, Tokio-native Yamux-compatible streaming multiplexer"
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "veyrmux"
+path = "src/lib.rs"
+
+[features]
+default = []
+futures-compat = ["dep:futures-io", "dep:tokio-util"]
+
+[dependencies]
+bytes = "1"
+tokio = { version = "1", features = ["io-util", "net", "macros", "rt", "sync"] }
+futures-io = { version = "0.3", optional = true }
+tokio-util = { version = "0.7", optional = true, features = ["compat"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["async_tokio"] }
+futures = "0.3"
+tokio = { version = "1", features = ["full"] }
+yamux = "0.13.10"
+proptest = "1"
+tokio-util = { version = "0.7", features = ["compat"] }
+fearless_simd = "1.2"
+fearless_simd_macros = "0.1"
+
+
+[[bench]]
+name = "transport"
+harness = false
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+[profile.profiling]
+inherits = "release"
+debug = true
+strip = false
+
+[profile.bench]
+lto = true
+codegen-units = 1

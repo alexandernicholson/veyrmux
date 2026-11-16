@@ -1,0 +1,116 @@
+{
+  "veyrmux": [
+    {
+      "event": "task-clock",
+      "unit": "msec",
+      "value": 891.66,
+      "raw_columns": [
+        "891657232",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "cycles",
+      "unit": "",
+      "value": 4402676812.0,
+      "raw_columns": [
+        "891657232",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "instructions",
+      "unit": "",
+      "value": 7764156640.0,
+      "raw_columns": [
+        "891657232",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "context-switches",
+      "unit": "",
+      "value": 5.0,
+      "raw_columns": [
+        "891657232",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "cpu-migrations",
+      "unit": "",
+      "value": 0.0,
+      "raw_columns": [
+        "891657232",
+        "100.00",
+        "",
+        ""
+      ]
+    }
+  ],
+  "yamux": [
+    {
+      "event": "task-clock",
+      "unit": "msec",
+      "value": 1315.25,
+      "raw_columns": [
+        "1315251582",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "cycles",
+      "unit": "",
+      "value": 6501158964.0,
+      "raw_columns": [
+        "1315251582",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "instructions",
+      "unit": "",
+      "value": 11164924958.0,
+      "raw_columns": [
+        "1315251582",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "context-switches",
+      "unit": "",
+      "value": 7.0,
+      "raw_columns": [
+        "1315251582",
+        "100.00",
+        "",
+        ""
+      ]
+    },
+    {
+      "event": "cpu-migrations",
+      "unit": "",
+      "value": 0.0,
+      "raw_columns": [
+        "1315251582",
+        "100.00",
+        "",
+        ""
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1611 @@
+{
+  "metadata": {
+    "workload": {
+      "payload_bytes_per_stream_per_direction": 1048576,
+      "streams": 8,
+      "rounds": 1024,
+      "transport": "duplex",
+      "runtime": "tokio-current-thread; both endpoints"
+    },
+    "sampling": {
+      "frequency_hz": 499,
+      "callgraph": "dwarf,16384",
+      "event": "cpu/cycles/P"
+    },
+    "profile": {
+      "name": "profiling",
+      "inherits": "release",
+      "debug": true,
+      "strip": false,
+      "lto": "thin",
+      "codegen_units": 1
+    },
+    "binary_sha256": "0b13ae5e3fb3ba5f0ca11ebc168249591c7d35b7a446c7770d6bd0bd1d062ee6",
+    "source_file_sha256": {
+      "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+      "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+      "examples/bench.rs": "e8a0812870ff8cadf26a7d6f4e29cb912727c61c9c2abb956e671a8231eaf188",
+      "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+      "examples/support/mod.rs": "337d0bd4f748941b6eef439a8c523238c97a38b5295c327b020f27cf48f52100",
+      "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+      "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+      "src/session.rs": "95625d19d5c2f24d910686a1421071102474e9d0706b9cbadef0b4d3ff1174a4",
+      "src/stream.rs": "1695e64d8ee7a8034a117b7ac49c78d4ec9828185709feadba382af39e3218a8",
+      "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea"
+    },
+    "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+    "caveat": "Only 659/847 samples and mostly shallow user callchains: leaf weights are useful but precise allocation/copy caller attribution is not established. No runtime source changes."
+  },
+  "engines": {
+    "veyrmux": {
+      "engine": "veyrmux",
+      "samples": 659,
+      "lost_samples": 0,
+      "approximate_cycles": 6256714064,
+      "leaf_symbols": [
+        {
+          "leaf_percent": 44.96,
+          "samples": 292,
+          "object": "libc.so.6",
+          "symbol": "__memmove_avx512_unaligned_erms"
+        },
+        {
+          "leaf_percent": 5.07,
+          "samples": 33,
+          "object": "libc.so.6",
+          "symbol": "_int_malloc"
+        },
+        {
+          "leaf_percent": 4.77,
+          "samples": 31,
+          "object": "bench",
+          "symbol": "<veyrmux::session::Connection<tokio::io::util::mem::DuplexStream>>::write_frames"
+        },
+        {
+          "leaf_percent": 4.63,
+          "samples": 30,
+          "object": "bench",
+          "symbol": "<tokio::io::util::mem::DuplexStream as tokio::io::async_read::AsyncRead>::poll_read"
+        },
+        {
+          "leaf_percent": 4.61,
+          "samples": 30,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::wake_by_ref"
+        },
+        {
+          "leaf_percent": 4.01,
+          "samples": 26,
+          "object": "bench",
+          "symbol": "<tokio::io::util::mem::DuplexStream as tokio::io::async_write::AsyncWrite>::poll_write"
+        },
+        {
+          "leaf_percent": 4.0,
+          "samples": 26,
+          "object": "libc.so.6",
+          "symbol": "__memcmp_evex_movbe"
+        },
+        {
+          "leaf_percent": 3.23,
+          "samples": 21,
+          "object": "bench",
+          "symbol": "bench::support::drive::<tokio::io::util::mem::DuplexStream>::{closure#0}"
+        },
+        {
+          "leaf_percent": 3.2,
+          "samples": 21,
+          "object": "bench",
+          "symbol": "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write"
+        },
+        {
+          "leaf_percent": 2.92,
+          "samples": 19,
+          "object": "bench",
+          "symbol": "bytes::bytes_mut::shared_v_drop"
+        },
+        {
+          "leaf_percent": 2.16,
+          "samples": 14,
+          "object": "bench",
+          "symbol": "<tokio::io::split::ReadHalf<bench::support::Stream> as tokio::io::async_read::AsyncRead>::poll_read"
+        },
+        {
+          "leaf_percent": 2.15,
+          "samples": 14,
+          "object": "bench",
+          "symbol": "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read"
+        },
+        {
+          "leaf_percent": 2.01,
+          "samples": 13,
+          "object": "bench",
+          "symbol": "<bytes::bytes_mut::BytesMut>::reserve_inner"
+        },
+        {
+          "leaf_percent": 1.84,
+          "samples": 12,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::wake_by_val"
+        },
+        {
+          "leaf_percent": 1.54,
+          "samples": 10,
+          "object": "bench",
+          "symbol": "bench::support::exchange::{closure#0}"
+        },
+        {
+          "leaf_percent": 1.39,
+          "samples": 9,
+          "object": "bench",
+          "symbol": "core::ptr::drop_glue::<std::sync::poison::mutex::MutexGuard<bench::support::Stream>>"
+        },
+        {
+          "leaf_percent": 1.24,
+          "samples": 8,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::clone_waker"
+        },
+        {
+          "leaf_percent": 0.77,
+          "samples": 5,
+          "object": "bench",
+          "symbol": "<hashbrown::map::HashMap<u32, veyrmux::session::StreamState, std::hash::random::RandomState>>::get_mut::<u32>"
+        },
+        {
+          "leaf_percent": 0.62,
+          "samples": 4,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::raw::poll::<core::pin::Pin<alloc::boxed::Box<bench::support::echo::{closure#0}>>, alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>"
+        },
+        {
+          "leaf_percent": 0.61,
+          "samples": 4,
+          "object": "bench",
+          "symbol": "veyrmux::session::lock"
+        },
+        {
+          "leaf_percent": 0.46,
+          "samples": 3,
+          "object": "bench",
+          "symbol": "<veyrmux::session::Shared>::enqueue"
+        },
+        {
+          "leaf_percent": 0.46,
+          "samples": 3,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::raw::poll::<bench::support::run_pair<tokio::io::util::mem::DuplexStream>::{closure#0}::{closure#2}, alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>"
+        },
+        {
+          "leaf_percent": 0.31,
+          "samples": 2,
+          "object": "libc.so.6",
+          "symbol": "_int_free_merge_chunk"
+        },
+        {
+          "leaf_percent": 0.31,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "<tokio::sync::task::atomic_waker::AtomicWaker>::register_by_ref"
+        },
+        {
+          "leaf_percent": 0.31,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::drop_waker"
+        },
+        {
+          "leaf_percent": 0.31,
+          "samples": 2,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.31,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_shutdown"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "libc.so.6",
+          "symbol": "unlink_chunk.isra.0"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<tokio::runtime::time::Driver>::park_internal"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<veyrmux::stream::Stream as core::ops::drop::Drop>::drop"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "core::slice::sort::unstable::quicksort::quicksort::<core::time::Duration, <core::time::Duration as core::cmp::PartialOrd>::lt>"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "[vdso]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<tokio::sync::notify::NotifiedProject>::poll_notified"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::raw::poll::<bench::support::drive<tokio::io::util::mem::DuplexStream>::{closure#0}, alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<tokio::io::util::mem::SimplexStream>::poll_read_deferred"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "libc.so.6",
+          "symbol": "_int_free_maybe_trim"
+        },
+        {
+          "leaf_percent": 0.15,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<bytes::bytes_mut::BytesMut>::split_to"
+        },
+        {
+          "leaf_percent": 0.06,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.01,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.0,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.0,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.0,
+          "samples": 6,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        }
+      ],
+      "observed_bench_stack_depth_histogram": {
+        "0": 287,
+        "1": 312,
+        "2": 31,
+        "3": 7,
+        "4": 2,
+        "5": 4,
+        "6": 2,
+        "7": 1,
+        "16": 2,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "27": 1
+      },
+      "stack_weighting": "recorded sample periods; bench comm only; leaf-to-root; top20 aggregate stacks; unresolved frames retained without addresses",
+      "aggregate_stacks": [
+        {
+          "sampled_cycle_percent": 44.0574,
+          "samples": 286,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 4.3011,
+          "samples": 28,
+          "leaf_to_root_symbols": [
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 4.0045,
+          "samples": 26,
+          "leaf_to_root_symbols": [
+            "__memcmp_evex_movbe"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.6178,
+          "samples": 4,
+          "leaf_to_root_symbols": [
+            "_int_malloc",
+            "_int_realloc",
+            "__GI___libc_realloc"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.3088,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "__internal_syscall_cancel",
+            "__syscall_cancel",
+            "[unresolved]",
+            "[unresolved]"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.2925,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<bytes::bytes_mut::BytesMut>::extend_from_slice",
+            "<veyrmux::session::Shared>::enqueue",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<bench::support::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}",
+            "<tokio::io::split::Inner<bench::support::Stream>>::with_lock::<core::task::poll::Poll<core::result::Result<usize, core::io::error::Error>>, <tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}>",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<&mut tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::util::write_all::WriteAll<tokio::io::split::WriteHalf<bench::support::Stream>> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#0}",
+            "<tokio::future::maybe_done::MaybeDone<bench::support::exchange::{closure#0}::{closure#0}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#2}",
+            "<core::future::poll_fn::PollFn<bench::support::exchange::{closure#0}::{closure#2}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1553,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<parking_lot::raw_mutex::RawMutex as lock_api::mutex::RawMutex>::unlock",
+            "<lock_api::mutex::MutexGuard<parking_lot::raw_mutex::RawMutex, tokio::io::util::mem::SimplexStream> as core::ops::drop::Drop>::drop",
+            "core::ptr::drop_glue::<lock_api::mutex::MutexGuard<parking_lot::raw_mutex::RawMutex, tokio::io::util::mem::SimplexStream>>",
+            "core::ptr::drop_glue::<tokio::loom::std::parking_lot::MutexGuard<tokio::io::util::mem::SimplexStream>>",
+            "<tokio::io::util::mem::DuplexStream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "bytes::bytes::PROMOTABLE_ODD_VTABLE"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1551,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<*mut u8>::copy_from_nonoverlapping",
+            "<tokio::io::read_buf::ReadBuf>::put_slice",
+            "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read",
+            "[unresolved]"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1548,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<std::sys::sync::mutex::futex::Mutex>::lock",
+            "<std::sync::poison::mutex::Mutex<veyrmux::session::Shared>>::lock",
+            "veyrmux::session::lock",
+            "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1547,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "_int_free_merge_chunk",
+            "_int_free_chunk"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1547,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "unlink_chunk",
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1547,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "__GI_memcpy",
+            "_int_realloc",
+            "__GI___libc_realloc"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1545,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "_int_free_create_chunk",
+            "_int_free_merge_chunk",
+            "_int_free_chunk"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1544,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1541,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "_int_free_maybe_trim",
+            "_int_free_chunk"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1539,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<bytes::bytes_mut::BytesMut>::extend_from_slice",
+            "<tokio::io::util::mem::SimplexStream>::poll_write_internal",
+            "<tokio::io::util::mem::SimplexStream>::poll_write_deferred"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1527,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "_int_malloc",
+            "__libc_malloc2",
+            "std::sys::alloc::unix::alloc",
+            "__rustc::__rdl_alloc",
+            "alloc::alloc::alloc",
+            "<alloc::alloc::Global>::alloc_impl_runtime",
+            "<alloc::alloc::Global>::alloc_impl",
+            "<alloc::alloc::Global as core::alloc::Allocator>::allocate",
+            "<alloc::raw_vec::RawVecInner>::try_allocate_in",
+            "<alloc::raw_vec::RawVecInner>::with_capacity_in",
+            "<alloc::raw_vec::RawVec<u8>>::with_capacity_in",
+            "<alloc::vec::Vec<u8>>::with_capacity_in",
+            "<alloc::vec::Vec<u8>>::with_capacity",
+            "<bytes::bytes_mut::BytesMut>::with_capacity",
+            "<veyrmux::session::Shared>::enqueue",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<bench::support::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}",
+            "<tokio::io::split::Inner<bench::support::Stream>>::with_lock::<core::task::poll::Poll<core::result::Result<usize, core::io::error::Error>>, <tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}>",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<&mut tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::util::write_all::WriteAll<tokio::io::split::WriteHalf<bench::support::Stream>> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#0}",
+            "<tokio::future::maybe_done::MaybeDone<bench::support::exchange::{closure#0}::{closure#0}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#2}",
+            "<core::future::poll_fn::PollFn<bench::support::exchange::{closure#0}::{closure#2}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1505,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<*mut u8>::copy_from_nonoverlapping",
+            "<tokio::io::read_buf::ReadBuf>::put_slice",
+            "<tokio::io::util::mem::SimplexStream>::poll_read_internal",
+            "<tokio::io::util::mem::SimplexStream>::poll_read_deferred",
+            "<tokio::io::util::mem::DuplexStream as tokio::io::async_read::AsyncRead>::poll_read"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1466,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<veyrmux::session::Shared>::finish_if_closed",
+            "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read",
+            "[unresolved]"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1136,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<std::sys::sync::mutex::futex::Mutex>::unlock",
+            "<std::sync::poison::mutex::MutexGuard<veyrmux::session::Shared> as core::ops::drop::Drop>::drop",
+            "core::ptr::drop_glue::<std::sync::poison::mutex::MutexGuard<veyrmux::session::Shared>>",
+            "core::mem::drop::<std::sync::poison::mutex::MutexGuard<veyrmux::session::Shared>>",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write"
+          ]
+        }
+      ],
+      "workload": {
+        "engine": "veyrmux",
+        "transport": "duplex",
+        "payload_bytes_per_stream_per_direction": 1048576,
+        "streams": 8,
+        "rounds": 1024,
+        "receive_window_bytes": 262144,
+        "stream_cap": 64,
+        "data_chunk_bytes": 16384,
+        "elapsed_secs": 1.301678527,
+        "payload_bytes": 17179869184,
+        "payload_bytes_per_sec": 13198242751.684,
+        "requests": 8192,
+        "requests_per_sec": 6293.413,
+        "latency_distribution": "all successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds",
+        "latency_samples": 8192,
+        "latency_p50_secs": 0.001203347,
+        "latency_p90_secs": 0.001296285,
+        "latency_p99_secs": 0.001437461,
+        "byte_accounting": "request plus echo payload; excludes frame headers",
+        "runtime": "tokio-current-thread; both endpoints",
+        "startup_included": false,
+        "warmup_bytes": 4096
+      },
+      "representative_nontrivial_stacks": [
+        {
+          "sampled_cycle_percent": 0.2925,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<bytes::bytes_mut::BytesMut>::extend_from_slice",
+            "<veyrmux::session::Shared>::enqueue",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<bench::support::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}",
+            "<tokio::io::split::Inner<bench::support::Stream>>::with_lock::<core::task::poll::Poll<core::result::Result<usize, core::io::error::Error>>, <tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}>",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<&mut tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::util::write_all::WriteAll<tokio::io::split::WriteHalf<bench::support::Stream>> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#0}",
+            "<tokio::future::maybe_done::MaybeDone<bench::support::exchange::{closure#0}::{closure#0}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#2}",
+            "<core::future::poll_fn::PollFn<bench::support::exchange::{closure#0}::{closure#2}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1551,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<*mut u8>::copy_from_nonoverlapping",
+            "<tokio::io::read_buf::ReadBuf>::put_slice",
+            "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read",
+            "[unresolved]"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1548,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<std::sys::sync::mutex::futex::Mutex>::lock",
+            "<std::sync::poison::mutex::Mutex<veyrmux::session::Shared>>::lock",
+            "veyrmux::session::lock",
+            "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1527,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "_int_malloc",
+            "__libc_malloc2",
+            "std::sys::alloc::unix::alloc",
+            "__rustc::__rdl_alloc",
+            "alloc::alloc::alloc",
+            "<alloc::alloc::Global>::alloc_impl_runtime",
+            "<alloc::alloc::Global>::alloc_impl",
+            "<alloc::alloc::Global as core::alloc::Allocator>::allocate",
+            "<alloc::raw_vec::RawVecInner>::try_allocate_in",
+            "<alloc::raw_vec::RawVecInner>::with_capacity_in",
+            "<alloc::raw_vec::RawVec<u8>>::with_capacity_in",
+            "<alloc::vec::Vec<u8>>::with_capacity_in",
+            "<alloc::vec::Vec<u8>>::with_capacity",
+            "<bytes::bytes_mut::BytesMut>::with_capacity",
+            "<veyrmux::session::Shared>::enqueue",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<bench::support::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}",
+            "<tokio::io::split::Inner<bench::support::Stream>>::with_lock::<core::task::poll::Poll<core::result::Result<usize, core::io::error::Error>>, <tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}>",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<&mut tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::util::write_all::WriteAll<tokio::io::split::WriteHalf<bench::support::Stream>> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#0}",
+            "<tokio::future::maybe_done::MaybeDone<bench::support::exchange::{closure#0}::{closure#0}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#2}",
+            "<core::future::poll_fn::PollFn<bench::support::exchange::{closure#0}::{closure#2}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1466,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<veyrmux::session::Shared>::finish_if_closed",
+            "<veyrmux::stream::Stream as tokio::io::async_read::AsyncRead>::poll_read",
+            "[unresolved]"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.1136,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "<std::sys::sync::mutex::futex::Mutex>::unlock",
+            "<std::sync::poison::mutex::MutexGuard<veyrmux::session::Shared> as core::ops::drop::Drop>::drop",
+            "core::ptr::drop_glue::<std::sync::poison::mutex::MutexGuard<veyrmux::session::Shared>>",
+            "core::mem::drop::<std::sync::poison::mutex::MutexGuard<veyrmux::session::Shared>>",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.0591,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms",
+            "core::ptr::copy_nonoverlapping::<u8>",
+            "<bytes::bytes_mut::BytesMut>::extend_from_slice",
+            "<veyrmux::session::Shared>::enqueue",
+            "<veyrmux::stream::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<bench::support::Stream as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}",
+            "<tokio::io::split::Inner<bench::support::Stream>>::with_lock::<core::task::poll::Poll<core::result::Result<usize, core::io::error::Error>>, <tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write::{closure#0}>",
+            "<tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<&mut tokio::io::split::WriteHalf<bench::support::Stream> as tokio::io::async_write::AsyncWrite>::poll_write",
+            "<tokio::io::util::write_all::WriteAll<tokio::io::split::WriteHalf<bench::support::Stream>> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#0}",
+            "<tokio::future::maybe_done::MaybeDone<bench::support::exchange::{closure#0}::{closure#0}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}::{closure#2}",
+            "<core::future::poll_fn::PollFn<bench::support::exchange::{closure#0}::{closure#2}> as core::future::future::Future>::poll",
+            "bench::support::exchange::{closure#0}"
+          ]
+        }
+      ],
+      "empty_callchain_cycle_percent": 44.2348,
+      "visible_leaf_groups_percent": {
+        "copy": 44.96,
+        "validation_compare": 4.0,
+        "allocator_free": 5.53,
+        "bytes_reserve_drop": 4.93,
+        "hashmap": 0.77,
+        "session_lock": 0.61,
+        "wake_functions": 8.0
+      }
+    },
+    "yamux": {
+      "engine": "yamux",
+      "samples": 847,
+      "lost_samples": 0,
+      "approximate_cycles": 8022244401,
+      "leaf_symbols": [
+        {
+          "leaf_percent": 30.32,
+          "samples": 254,
+          "object": "libc.so.6",
+          "symbol": "__memmove_avx512_unaligned_erms"
+        },
+        {
+          "leaf_percent": 7.5,
+          "samples": 63,
+          "object": "bench",
+          "symbol": "<tokio::io::util::mem::DuplexStream as tokio::io::async_write::AsyncWrite>::poll_write"
+        },
+        {
+          "leaf_percent": 6.91,
+          "samples": 58,
+          "object": "bench",
+          "symbol": "<yamux::connection::stream::Stream as futures_io::if_std::AsyncRead>::poll_read"
+        },
+        {
+          "leaf_percent": 5.25,
+          "samples": 44,
+          "object": "bench",
+          "symbol": "<tokio::io::util::mem::DuplexStream as tokio::io::async_read::AsyncRead>::poll_read"
+        },
+        {
+          "leaf_percent": 4.75,
+          "samples": 40,
+          "object": "libc.so.6",
+          "symbol": "__memset_avx512_unaligned_erms"
+        },
+        {
+          "leaf_percent": 4.21,
+          "samples": 35,
+          "object": "bench",
+          "symbol": "<yamux::connection::rtt::Rtt>::next_ping"
+        },
+        {
+          "leaf_percent": 3.96,
+          "samples": 33,
+          "object": "bench",
+          "symbol": "<futures_channel::mpsc::Sender<yamux::connection::StreamCommand>>::start_send"
+        },
+        {
+          "leaf_percent": 3.93,
+          "samples": 33,
+          "object": "libc.so.6",
+          "symbol": "__memcmp_evex_movbe"
+        },
+        {
+          "leaf_percent": 3.72,
+          "samples": 31,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::clone_waker"
+        },
+        {
+          "leaf_percent": 2.4,
+          "samples": 20,
+          "object": "bench",
+          "symbol": "<yamux::connection::stream::Stream as futures_io::if_std::AsyncWrite>::poll_write"
+        },
+        {
+          "leaf_percent": 2.4,
+          "samples": 20,
+          "object": "bench",
+          "symbol": "<yamux::connection::Connection<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>>>::poll_next_inbound"
+        },
+        {
+          "leaf_percent": 2.02,
+          "samples": 17,
+          "object": "bench",
+          "symbol": "<tokio::io::split::ReadHalf<bench::support::Stream> as tokio::io::async_read::AsyncRead>::poll_read"
+        },
+        {
+          "leaf_percent": 1.8,
+          "samples": 15,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 1.8,
+          "samples": 15,
+          "object": "bench",
+          "symbol": "<futures_util::stream::futures_unordered::FuturesUnordered<futures_util::stream::stream::into_future::StreamFuture<yamux::tagged_stream::TaggedStream<yamux::frame::header::StreamId, futures_channel::mpsc::Receiver<yamux::connection::StreamCommand>>>>>::push"
+        },
+        {
+          "leaf_percent": 1.31,
+          "samples": 11,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::wake_by_val"
+        },
+        {
+          "leaf_percent": 1.2,
+          "samples": 10,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::waker::drop_waker"
+        },
+        {
+          "leaf_percent": 1.18,
+          "samples": 10,
+          "object": "bench",
+          "symbol": "core::ptr::drop_glue::<<futures_util::stream::futures_unordered::FuturesUnordered<_> as futures_core::stream::Stream>::poll_next::Bomb<futures_util::stream::stream::into_future::StreamFuture<yamux::tagged_stream::TaggedStream<yamux::frame::header::StreamId, futures_channel::mpsc::Receiver<yamux::connection::StreamCommand>>>>>"
+        },
+        {
+          "leaf_percent": 1.07,
+          "samples": 9,
+          "object": "bench",
+          "symbol": "bench::support::exchange::{closure#0}"
+        },
+        {
+          "leaf_percent": 0.72,
+          "samples": 6,
+          "object": "bench",
+          "symbol": "<futures_channel::mpsc::Receiver<yamux::connection::StreamCommand>>::next_message"
+        },
+        {
+          "leaf_percent": 0.72,
+          "samples": 6,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.71,
+          "samples": 6,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::raw::poll::<bench::support::run_pair<tokio::io::util::mem::DuplexStream>::{closure#0}::{closure#2}, alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>"
+        },
+        {
+          "leaf_percent": 0.6,
+          "samples": 5,
+          "object": "bench",
+          "symbol": "<futures_util::stream::select_all::SelectAll<yamux::tagged_stream::TaggedStream<yamux::frame::header::StreamId, futures_channel::mpsc::Receiver<yamux::connection::StreamCommand>>> as futures_core::stream::Stream>::poll_next"
+        },
+        {
+          "leaf_percent": 0.6,
+          "samples": 5,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.6,
+          "samples": 5,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.48,
+          "samples": 4,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::raw::poll::<core::pin::Pin<alloc::boxed::Box<bench::support::echo::{closure#0}>>, alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>"
+        },
+        {
+          "leaf_percent": 0.48,
+          "samples": 4,
+          "object": "libc.so.6",
+          "symbol": "_int_malloc"
+        },
+        {
+          "leaf_percent": 0.48,
+          "samples": 4,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.36,
+          "samples": 3,
+          "object": "bench",
+          "symbol": "<alloc::sync::Arc<futures_util::stream::futures_unordered::task::Task<futures_util::stream::stream::into_future::StreamFuture<yamux::tagged_stream::TaggedStream<yamux::frame::header::StreamId, futures_channel::mpsc::Receiver<yamux::connection::StreamCommand>>>>>>::drop_slow"
+        },
+        {
+          "leaf_percent": 0.36,
+          "samples": 3,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.36,
+          "samples": 3,
+          "object": "bench",
+          "symbol": "<tokio::sync::task::atomic_waker::AtomicWaker>::register_by_ref"
+        },
+        {
+          "leaf_percent": 0.36,
+          "samples": 3,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "bench::support::drive::<tokio::io::util::mem::DuplexStream>::{closure#0}"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "<futures_channel::mpsc::BoundedSenderInner<yamux::connection::StreamCommand>>::poll_unparked"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "<tokio::io::util::mem::SimplexStream>::poll_read_deferred"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "[vdso]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.24,
+          "samples": 2,
+          "object": "bench",
+          "symbol": "tokio::runtime::task::raw::poll::<bench::support::drive<tokio::io::util::mem::DuplexStream>::{closure#0}, alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>"
+        },
+        {
+          "leaf_percent": 0.16,
+          "samples": 2,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<futures_channel::mpsc::queue::Queue<alloc::sync::Arc<std::sync::poison::mutex::Mutex<futures_channel::mpsc::SenderTask>>>>::pop_spin"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<yamux::frame::io::Io<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>> as futures_sink::Sink<yamux::frame::Frame<()>>>::poll_ready"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[vdso]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "core::ptr::drop_glue::<futures_channel::mpsc::Sender<yamux::connection::StreamCommand>>"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "libc.so.6",
+          "symbol": "_int_free_merge_chunk"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<tokio::runtime::scheduler::current_thread::Core>::next_task"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<std::sys::pal::unix::time::Timespec>::sub_timespec"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "core::ptr::drop_glue::<futures_util::stream::futures_unordered::task::Task<futures_util::stream::stream::into_future::StreamFuture<yamux::tagged_stream::TaggedStream<yamux::frame::header::StreamId, futures_channel::mpsc::Receiver<yamux::connection::StreamCommand>>>>>"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<tokio::task::join_set::JoinSet<core::result::Result<(), core::io::error::Error>>>::insert"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[vdso]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<tokio::runtime::driver::Driver>::park_timeout"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.12,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.11,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.11,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.11,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.11,
+          "samples": 1,
+          "object": "bench",
+          "symbol": "<alloc::sync::Arc<lock_api::mutex::Mutex<parking_lot::raw_mutex::RawMutex, yamux::connection::stream::Shared>>>::drop_slow"
+        },
+        {
+          "leaf_percent": 0.11,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.01,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.0,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.0,
+          "samples": 1,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        },
+        {
+          "leaf_percent": 0.0,
+          "samples": 6,
+          "object": "[kernel.kallsyms]",
+          "symbol": "[unresolved]"
+        }
+      ],
+      "observed_bench_stack_depth_histogram": {
+        "0": 423,
+        "1": 326,
+        "2": 9,
+        "3": 7,
+        "5": 10,
+        "6": 9,
+        "7": 5,
+        "8": 3,
+        "9": 5,
+        "10": 8,
+        "11": 2,
+        "12": 1,
+        "13": 8,
+        "14": 4,
+        "15": 8,
+        "16": 5,
+        "17": 2,
+        "19": 3,
+        "21": 1,
+        "38": 1
+      },
+      "stack_weighting": "recorded sample periods; bench comm only; leaf-to-root; top20 aggregate stacks; unresolved frames retained without addresses",
+      "aggregate_stacks": [
+        {
+          "sampled_cycle_percent": 30.3167,
+          "samples": 254,
+          "leaf_to_root_symbols": [
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 4.6662,
+          "samples": 39,
+          "leaf_to_root_symbols": [
+            "__memset_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 3.9303,
+          "samples": 33,
+          "leaf_to_root_symbols": [
+            "__memcmp_evex_movbe"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.9667,
+          "samples": 8,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.7215,
+          "samples": 6,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.6005,
+          "samples": 5,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.596,
+          "samples": 5,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.4826,
+          "samples": 4,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.4805,
+          "samples": 4,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.4801,
+          "samples": 4,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.4792,
+          "samples": 4,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "__internal_syscall_cancel",
+            "__syscall_cancel"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.3596,
+          "samples": 3,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.3592,
+          "samples": 3,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.3566,
+          "samples": 3,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.3505,
+          "samples": 3,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__brk",
+            "__GI___sbrk",
+            "__glibc_morecore",
+            "systrim",
+            "_int_free_chunk"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.2415,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.2404,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__memcpy_avx512_unaligned_erms"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.2402,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "sysmalloc",
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.2393,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "_int_malloc",
+            "__libc_malloc2"
+          ]
+        },
+        {
+          "sampled_cycle_percent": 0.2389,
+          "samples": 2,
+          "leaf_to_root_symbols": [
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "[unresolved]",
+            "__brk",
+            "__GI___sbrk",
+            "__glibc_morecore",
+            "systrim",
+            "_int_free_chunk"
+          ]
+        }
+      ],
+      "workload": {
+        "engine": "yamux",
+        "transport": "duplex",
+        "payload_bytes_per_stream_per_direction": 1048576,
+        "streams": 8,
+        "rounds": 1024,
+        "receive_window_bytes": 262144,
+        "stream_cap": 64,
+        "data_chunk_bytes": 16384,
+        "elapsed_secs": 1.682886881,
+        "payload_bytes": 17179869184,
+        "payload_bytes_per_sec": 10208570390.537,
+        "requests": 8192,
+        "requests_per_sec": 4867.826,
+        "latency_distribution": "all successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds",
+        "latency_samples": 8192,
+        "latency_p50_secs": 0.001594546,
+        "latency_p90_secs": 0.001702054,
+        "latency_p99_secs": 0.002017015,
+        "byte_accounting": "request plus echo payload; excludes frame headers",
+        "runtime": "tokio-current-thread; both endpoints",
+        "startup_included": false,
+        "warmup_bytes": 4096
+      },
+      "representative_nontrivial_stacks": [
+        {
+          "sampled_cycle_percent": 0.0858,
+          "samples": 1,
+          "leaf_to_root_symbols": [
+            "__memset_avx512_unaligned_erms",
+            "std::sys::alloc::unix::alloc_zeroed",
+            "__rustc::__rdl_alloc_zeroed",
+            "alloc::alloc::alloc_zeroed",
+            "<alloc::alloc::Global>::alloc_impl_runtime",
+            "<alloc::alloc::Global>::alloc_impl",
+            "<alloc::alloc::Global as core::alloc::Allocator>::allocate_zeroed",
+            "<alloc::raw_vec::RawVecInner>::try_allocate_in",
+            "<alloc::raw_vec::RawVecInner>::with_capacity_zeroed_in",
+            "<alloc::raw_vec::RawVec<u8>>::with_capacity_zeroed_in",
+            "<u8 as alloc::vec::spec_from_elem::SpecFromElem>::from_elem::<alloc::alloc::Global>",
+            "alloc::vec::from_elem::<u8>",
+            "<yamux::frame::io::Io<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>> as futures_core::stream::Stream>::poll_next",
+            "<futures_util::stream::stream::fuse::Fuse<yamux::frame::io::Io<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>>> as futures_core::stream::Stream>::poll_next",
+            "<futures_util::stream::stream::fuse::Fuse<yamux::frame::io::Io<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>>> as futures_util::stream::stream::StreamExt>::poll_next_unpin",
+            "<yamux::connection::Active<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>>>::poll",
+            "<yamux::connection::Connection<tokio_util::compat::Compat<tokio::io::util::mem::DuplexStream>>>::poll_next_inbound",
+            "<bench::support::Connection<tokio::io::util::mem::DuplexStream>>::poll_inbound",
+            "bench::support::drive::<tokio::io::util::mem::DuplexStream>::{closure#0}::{closure#0}",
+            "<core::future::poll_fn::PollFn<bench::support::drive<tokio::io::util::mem::DuplexStream>::{closure#0}::{closure#0}> as core::future::future::Future>::poll",
+            "bench::support::drive::<tokio::io::util::mem::DuplexStream>::{closure#0}"
+          ]
+        }
+      ],
+      "empty_callchain_cycle_percent": 50.5527,
+      "visible_leaf_groups_percent": {
+        "copy": 30.32,
+        "validation_compare": 3.93,
+        "allocator_free": 0.6,
+        "bytes_reserve_drop": 0,
+        "hashmap": 0,
+        "session_lock": 0,
+        "wake_functions": 6.23
+      }
+    }
+  }
+}

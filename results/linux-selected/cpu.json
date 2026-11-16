@@ -1,0 +1,117 @@
+{
+  "source_sha256": "c7458f98fe259b31168382b383da50377e063e4843e0eff1e408bad9c2d0b6e9",
+  "binary_sha256": "28c6ca8b4f23f9747fce26b3e2c9bf27810e88a96b214b81d64978da1dfffaee",
+  "profile": {
+    "name": "release",
+    "lto": "thin",
+    "codegen_units": 1
+  },
+  "runtime": "tokio-current-thread; both endpoints",
+  "workload": {
+    "payload_bytes_per_stream_per_direction": 1048576,
+    "streams": 8,
+    "rounds": 256,
+    "transports": [
+      "tcp",
+      "duplex"
+    ],
+    "receive_window_bytes": 262144,
+    "stream_cap": 64,
+    "data_chunk_bytes": 16384
+  },
+  "measurement": "One perf-stat process per engine and transport; both endpoints.",
+  "counters": {
+    "tcp": {
+      "veyrmux": {
+        "task-clock": {
+          "value": 708.23,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 3452261551.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 5658886324.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 4.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "yamux": {
+        "task-clock": {
+          "value": 1271.59,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 6277789653.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 11611764594.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 7.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      }
+    },
+    "duplex": {
+      "veyrmux": {
+        "task-clock": {
+          "value": 335.36,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1599866545.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 2533994190.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 2.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "yamux": {
+        "task-clock": {
+          "value": 397.14,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1952161258.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 3066678231.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 2.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      }
+    }
+  }
+}

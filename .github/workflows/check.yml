@@ -1,0 +1,22 @@
+name: Check
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Formatting
+        timeout-minutes: 3
+        run: ./scripts/preflight.sh fmt
+      - name: Clippy including nursery
+        timeout-minutes: 3
+        run: ./scripts/preflight.sh clippy
+      - name: Native and compatibility protocol tests
+        timeout-minutes: 3
+        run: ./scripts/preflight.sh test

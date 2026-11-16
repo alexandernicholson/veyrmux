@@ -1,0 +1,8 @@
+payload=1048576
+streams=8
+rounds=256
+transport=duplex
+rustc 1.96.1 (31fca3adb 2026-06-26) (Homebrew)
+Darwin 27.0.0 arm64
+RUSTFLAGS=
+source_sha256=92cb95abd2ecc0df6d2e05dbe9747decfbd9560bdd08b4b40cbfa104ae77f614

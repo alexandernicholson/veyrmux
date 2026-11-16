@@ -1,0 +1,1 @@
+{"group_id":"transport/tcp","function_id":"bulk-1MiB-1stream","value_str":"yamux","throughput":{"Bytes":2097152},"full_id":"transport/tcp/bulk-1MiB-1stream/yamux","directory_name":"transport_tcp/bulk-1MiB-1stream/yamux","title":"transport/tcp/bulk-1MiB-1stream/yamux"}

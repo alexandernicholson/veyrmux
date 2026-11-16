@@ -1,0 +1,37 @@
+{
+  "workload": {
+    "payload_bytes_per_stream_per_direction": 1048576,
+    "streams": 8,
+    "rounds": 1024,
+    "transport": "duplex",
+    "runtime": "tokio-current-thread; both endpoints"
+  },
+  "sampling": {
+    "frequency_hz": 499,
+    "callgraph": "dwarf,16384",
+    "event": "cpu/cycles/P"
+  },
+  "profile": {
+    "name": "profiling",
+    "inherits": "release",
+    "debug": true,
+    "strip": false,
+    "lto": "thin",
+    "codegen_units": 1
+  },
+  "binary_sha256": "0b13ae5e3fb3ba5f0ca11ebc168249591c7d35b7a446c7770d6bd0bd1d062ee6",
+  "source_file_sha256": {
+    "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+    "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+    "examples/bench.rs": "e8a0812870ff8cadf26a7d6f4e29cb912727c61c9c2abb956e671a8231eaf188",
+    "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+    "examples/support/mod.rs": "337d0bd4f748941b6eef439a8c523238c97a38b5295c327b020f27cf48f52100",
+    "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+    "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+    "src/session.rs": "95625d19d5c2f24d910686a1421071102474e9d0706b9cbadef0b4d3ff1174a4",
+    "src/stream.rs": "1695e64d8ee7a8034a117b7ac49c78d4ec9828185709feadba382af39e3218a8",
+    "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea"
+  },
+  "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+  "caveat": "Only 659/847 samples and mostly shallow user callchains: leaf weights are useful but precise allocation/copy caller attribution is not established. No runtime source changes."
+}

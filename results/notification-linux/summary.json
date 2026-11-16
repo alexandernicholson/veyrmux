@@ -1,0 +1,141 @@
+{
+  "tcp": {
+    "selected_b": {
+      "runs": 4,
+      "mean_seconds": 0.6678527635,
+      "stddev_seconds": 0.020351221003423525,
+      "min_seconds": 0.638441983,
+      "max_seconds": 0.684524062
+    },
+    "wakes": {
+      "runs": 4,
+      "mean_seconds": 0.6624049752500001,
+      "stddev_seconds": 0.02637706458216982,
+      "min_seconds": 0.633644414,
+      "max_seconds": 0.686140638
+    },
+    "throughput_change_percent": 0.8224256238329009,
+    "elapsed_change_percent": -0.8157169585478408,
+    "cpu": {
+      "selected-b": {
+        "task-clock": {
+          "value": 650.08,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 3193485011.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 5245060985.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 3.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "wakes": {
+        "task-clock": {
+          "value": 634.44,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 3144350557.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 5347022871.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 6.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      }
+    },
+    "cpu_change_percent": {
+      "task-clock": -2.4058577405857706,
+      "cycles": -1.5385841433654956,
+      "instructions": 1.943959970943987,
+      "context-switches": 100.0
+    }
+  },
+  "duplex": {
+    "selected_b": {
+      "runs": 4,
+      "mean_seconds": 0.3221618985,
+      "stddev_seconds": 0.004449601453395773,
+      "min_seconds": 0.316457422,
+      "max_seconds": 0.327330245
+    },
+    "wakes": {
+      "runs": 4,
+      "mean_seconds": 0.3218677365,
+      "stddev_seconds": 0.004376345398824426,
+      "min_seconds": 0.316465821,
+      "max_seconds": 0.326883347
+    },
+    "throughput_change_percent": 0.09139219829819023,
+    "elapsed_change_percent": -0.09130874922503862,
+    "cpu": {
+      "selected-b": {
+        "task-clock": {
+          "value": 322.19,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1588558735.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 2549911206.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 0.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "wakes": {
+        "task-clock": {
+          "value": 313.71,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1556704096.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 2548884913.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 2.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      }
+    },
+    "cpu_change_percent": {
+      "task-clock": -2.6319873366647095,
+      "cycles": -2.005254089644981,
+      "instructions": -0.04024818580290468
+    }
+  }
+}

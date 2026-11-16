@@ -1,0 +1,1 @@
+{"group_id":"transport/tcp","function_id":"bulk-1MiB-8streams","value_str":"veyrmux","throughput":{"Bytes":16777216},"full_id":"transport/tcp/bulk-1MiB-8streams/veyrmux","directory_name":"transport_tcp/bulk-1MiB-8streams/veyrmux","title":"transport/tcp/bulk-1MiB-8streams/veyrmux"}

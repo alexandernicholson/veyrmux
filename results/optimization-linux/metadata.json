@@ -1,0 +1,175 @@
+{
+  "variants": {
+    "baseline": {
+      "variant": "baseline",
+      "source_sha256": "2fbc573143fdb11573b6aa9dc6b5b4e693b1d27ab5669049018d65bd294e6c31",
+      "source_file_sha256": {
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "examples/bench.rs": "e8a0812870ff8cadf26a7d6f4e29cb912727c61c9c2abb956e671a8231eaf188",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "337d0bd4f748941b6eef439a8c523238c97a38b5295c327b020f27cf48f52100",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "95625d19d5c2f24d910686a1421071102474e9d0706b9cbadef0b4d3ff1174a4",
+        "src/stream.rs": "1695e64d8ee7a8034a117b7ac49c78d4ec9828185709feadba382af39e3218a8",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "2fa3be9b6b2d16b44928c05f9b132f7b662b36f4343705caf89c720a5c16399d",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/support/mod.rs": "64754f4c5015b783977583f06758618c7cd7adb45cffdad65d0ccd0e0673609c",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "binary_sha256": "f50a697b77fa2479a825507a286af739d07c8bd258781c35a3de9bcd8d3ad259",
+      "profile": {
+        "name": "release",
+        "lto": "thin",
+        "codegen_units": 1
+      },
+      "runtime": "tokio-current-thread; both endpoints",
+      "os": "Linux",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+      "acceptance": {
+        "passed": 22,
+        "failed": 0,
+        "evidence": "Prior all-feature Linux run on preserved identical baseline source."
+      }
+    },
+    "batching": {
+      "variant": "batching",
+      "source_sha256": "478e8c27ed55a52e979349ecabb002422f539895ed155fe2fe03f4f211db7b42",
+      "source_file_sha256": {
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "examples/bench.rs": "e8a0812870ff8cadf26a7d6f4e29cb912727c61c9c2abb956e671a8231eaf188",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "337d0bd4f748941b6eef439a8c523238c97a38b5295c327b020f27cf48f52100",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "e74191bafe2d3e0865d4486acc57a9aefc31654365f8a86e013f7d354f22b4e4",
+        "src/stream.rs": "1695e64d8ee7a8034a117b7ac49c78d4ec9828185709feadba382af39e3218a8",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "2fa3be9b6b2d16b44928c05f9b132f7b662b36f4343705caf89c720a5c16399d",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/support/mod.rs": "64754f4c5015b783977583f06758618c7cd7adb45cffdad65d0ccd0e0673609c",
+        "tests/vectored.rs": "3e016ede347cfa529fb3835071ed97cdf70e173a9701d7513d0f3ad6c314de87",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "binary_sha256": "eb0c6bf79d7b9a6caf8722873bc98998654c20770598eaa856ac9d13413cf91b",
+      "profile": {
+        "name": "release",
+        "lto": "thin",
+        "codegen_units": 1
+      },
+      "runtime": "tokio-current-thread; both endpoints",
+      "os": "Linux",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+      "acceptance": {
+        "passed": 26,
+        "failed": 0,
+        "fresh_package_build": true
+      }
+    },
+    "ownership": {
+      "variant": "ownership",
+      "source_sha256": "6331a3a01cc45fcf8f8eb494e6ec61ab536a9c721e99d901be2c5c7122f8cc21",
+      "source_file_sha256": {
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "examples/bench.rs": "e8a0812870ff8cadf26a7d6f4e29cb912727c61c9c2abb956e671a8231eaf188",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "337d0bd4f748941b6eef439a8c523238c97a38b5295c327b020f27cf48f52100",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "8c0c31528d3c072271385ecf2dbdf0f4ba437ca61714e402c2d0d00cd3685598",
+        "src/stream.rs": "1695e64d8ee7a8034a117b7ac49c78d4ec9828185709feadba382af39e3218a8",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "2fa3be9b6b2d16b44928c05f9b132f7b662b36f4343705caf89c720a5c16399d",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/support/mod.rs": "64754f4c5015b783977583f06758618c7cd7adb45cffdad65d0ccd0e0673609c",
+        "tests/vectored.rs": "3e016ede347cfa529fb3835071ed97cdf70e173a9701d7513d0f3ad6c314de87",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "binary_sha256": "6ce9f5bde3e828e769df6d2143db42aa204149ccaf02ace797ff910237d53e95",
+      "profile": {
+        "name": "release",
+        "lto": "thin",
+        "codegen_units": 1
+      },
+      "runtime": "tokio-current-thread; both endpoints",
+      "os": "Linux",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+      "acceptance": {
+        "passed": 26,
+        "failed": 0,
+        "fresh_package_build": true
+      }
+    },
+    "reuse": {
+      "variant": "reuse",
+      "source_sha256": "05486cb905fea1f71702442335c58f95a8bdc4b2ac416eca0060cba1877bf89e",
+      "source_file_sha256": {
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "examples/bench.rs": "e8a0812870ff8cadf26a7d6f4e29cb912727c61c9c2abb956e671a8231eaf188",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "337d0bd4f748941b6eef439a8c523238c97a38b5295c327b020f27cf48f52100",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session/cache_tests.rs": "f71fce2d6a23fd49fb47946a6aafebeeee1552dfaf7ccb033a1ce876f7c94204",
+        "src/session.rs": "491af9f2b66a6c9d7b5b59f5b05793d2a92af9ef4f32b7d29428b7f07e438ca6",
+        "src/stream.rs": "1695e64d8ee7a8034a117b7ac49c78d4ec9828185709feadba382af39e3218a8",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "2fa3be9b6b2d16b44928c05f9b132f7b662b36f4343705caf89c720a5c16399d",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/support/mod.rs": "64754f4c5015b783977583f06758618c7cd7adb45cffdad65d0ccd0e0673609c",
+        "tests/vectored.rs": "3e016ede347cfa529fb3835071ed97cdf70e173a9701d7513d0f3ad6c314de87",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "binary_sha256": "5e5fe43740df942812d904cb46f8a4d9422d5188567444b7a36385481bad8694",
+      "profile": {
+        "name": "release",
+        "lto": "thin",
+        "codegen_units": 1
+      },
+      "runtime": "tokio-current-thread; both endpoints",
+      "os": "Linux",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+      "acceptance": {
+        "passed": 29,
+        "failed": 0,
+        "fresh_package_build": true
+      }
+    }
+  },
+  "workload": {
+    "payload_per_stream_per_direction": 1048576,
+    "streams": 8,
+    "rounds": 256,
+    "transports": [
+      "tcp",
+      "duplex"
+    ]
+  },
+  "measurement": {
+    "ordering": "ABBA",
+    "repetitions_per_pair_transport": 2,
+    "warmup_runs_per_variant_pair_transport": 1,
+    "best_prior_reference_per_transport": {
+      "tcp": "batching",
+      "duplex": "ownership"
+    },
+    "cpu_pairs": {
+      "tcp": "batching",
+      "duplex": "ownership"
+    },
+    "process_deadline_seconds": 30
+  }
+}

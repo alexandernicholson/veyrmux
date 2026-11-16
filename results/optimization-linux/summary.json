@@ -1,0 +1,222 @@
+{
+  "pairs": [
+    {
+      "transport": "tcp",
+      "reference": "baseline",
+      "reference_stats": {
+        "runs": 4,
+        "mean_seconds": 0.8503971745000001,
+        "stddev_seconds": 0.04596513030060479,
+        "min_seconds": 0.783597242,
+        "max_seconds": 0.883456671,
+        "mean_of_run_p99_seconds": 0.00404529725
+      },
+      "reuse_stats": {
+        "runs": 4,
+        "mean_seconds": 0.67761269125,
+        "stddev_seconds": 0.008124103778503443,
+        "min_seconds": 0.667436899,
+        "max_seconds": 0.685487506,
+        "mean_of_run_p99_seconds": 0.003267608
+      },
+      "elapsed_change_percent": -20.31809234921206,
+      "throughput_change_percent": 25.49900341023166
+    },
+    {
+      "transport": "tcp",
+      "reference": "batching",
+      "reference_stats": {
+        "runs": 4,
+        "mean_seconds": 0.6616997965,
+        "stddev_seconds": 0.03837812319965006,
+        "min_seconds": 0.627752095,
+        "max_seconds": 0.716314332,
+        "mean_of_run_p99_seconds": 0.0033089945
+      },
+      "reuse_stats": {
+        "runs": 4,
+        "mean_seconds": 0.68027145625,
+        "stddev_seconds": 0.010657909242524266,
+        "min_seconds": 0.665853703,
+        "max_seconds": 0.689845537,
+        "mean_of_run_p99_seconds": 0.0033200715
+      },
+      "elapsed_change_percent": 2.8066594320012017,
+      "throughput_change_percent": -2.73003660220823
+    },
+    {
+      "transport": "duplex",
+      "reference": "baseline",
+      "reference_stats": {
+        "runs": 4,
+        "mean_seconds": 0.321786239,
+        "stddev_seconds": 0.005440274276642936,
+        "min_seconds": 0.314649282,
+        "max_seconds": 0.326721902,
+        "mean_of_run_p99_seconds": 0.0014275435
+      },
+      "reuse_stats": {
+        "runs": 4,
+        "mean_seconds": 0.3181487235,
+        "stddev_seconds": 0.0021117239040602913,
+        "min_seconds": 0.315572166,
+        "max_seconds": 0.320047274,
+        "mean_of_run_p99_seconds": 0.0015207460000000001
+      },
+      "elapsed_change_percent": -1.1304136284087551,
+      "throughput_change_percent": 1.143338077859668
+    },
+    {
+      "transport": "duplex",
+      "reference": "ownership",
+      "reference_stats": {
+        "runs": 4,
+        "mean_seconds": 0.3241003205,
+        "stddev_seconds": 0.0035446484386317347,
+        "min_seconds": 0.320717176,
+        "max_seconds": 0.328798674,
+        "mean_of_run_p99_seconds": 0.0014321507500000001
+      },
+      "reuse_stats": {
+        "runs": 4,
+        "mean_seconds": 0.31725573525,
+        "stddev_seconds": 0.003964823189266437,
+        "min_seconds": 0.312541239,
+        "max_seconds": 0.32164131,
+        "mean_of_run_p99_seconds": 0.00146836
+      },
+      "elapsed_change_percent": -2.1118724101971353,
+      "throughput_change_percent": 2.157434677928327
+    }
+  ],
+  "cpu": [
+    {
+      "transport": "tcp",
+      "variant": "batching",
+      "counters": {
+        "task-clock": {
+          "value": 687.84,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 3348543432.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 5659527375.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 2.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "relative_to_batching_percent": {
+        "task-clock": 0.0,
+        "cycles": 0.0,
+        "instructions": 0.0,
+        "context-switches": 0.0
+      }
+    },
+    {
+      "transport": "tcp",
+      "variant": "reuse",
+      "counters": {
+        "task-clock": {
+          "value": 710.07,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 3520009102.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 5603494060.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 3.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "relative_to_batching_percent": {
+        "task-clock": 3.2318562456385314,
+        "cycles": 5.120604629505676,
+        "instructions": -0.9900705710430446,
+        "context-switches": 50.0
+      }
+    },
+    {
+      "transport": "duplex",
+      "variant": "ownership",
+      "counters": {
+        "task-clock": {
+          "value": 343.19,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1695793123.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 2592202984.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 1.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "relative_to_ownership_percent": {
+        "task-clock": 0.0,
+        "cycles": 0.0,
+        "instructions": 0.0,
+        "context-switches": 0.0
+      }
+    },
+    {
+      "transport": "duplex",
+      "variant": "reuse",
+      "counters": {
+        "task-clock": {
+          "value": 325.9,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1613643731.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 2450764079.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 2.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "relative_to_ownership_percent": {
+        "task-clock": -5.038025583496031,
+        "cycles": -4.844305056189335,
+        "instructions": -5.456320584190799,
+        "context-switches": 100.0
+      }
+    }
+  ]
+}

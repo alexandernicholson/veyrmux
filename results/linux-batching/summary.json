@@ -1,0 +1,108 @@
+{
+  "tcp": {
+    "veyrmux_mean_seconds": 0.6598292621533335,
+    "veyrmux_stddev_seconds": 0.02681883268101801,
+    "yamux_mean_seconds": 1.24973247682,
+    "yamux_stddev_seconds": 0.021353196755022265,
+    "speedup": 1.894024027884933,
+    "cpu": {
+      "veyrmux": {
+        "task-clock": {
+          "value": 656.83,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 3225717796.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 5266407616.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 2.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "yamux": {
+        "task-clock": {
+          "value": 1178.86,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 5817165925.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 10729635505.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 4.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      }
+    }
+  },
+  "duplex": {
+    "veyrmux_mean_seconds": 0.3294982025866667,
+    "veyrmux_stddev_seconds": 0.006370954617840274,
+    "yamux_mean_seconds": 0.4038385282533334,
+    "yamux_stddev_seconds": 0.008362887231722219,
+    "speedup": 1.2256167866260614,
+    "cpu": {
+      "veyrmux": {
+        "task-clock": {
+          "value": 337.12,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1631758384.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 2572722571.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 0.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      },
+      "yamux": {
+        "task-clock": {
+          "value": 403.57,
+          "unit": "msec"
+        },
+        "cycles": {
+          "value": 1979490082.0,
+          "unit": ""
+        },
+        "instructions": {
+          "value": 3075297815.0,
+          "unit": ""
+        },
+        "context-switches": {
+          "value": 3.0,
+          "unit": ""
+        },
+        "cpu-migrations": {
+          "value": 0.0,
+          "unit": ""
+        }
+      }
+    }
+  }
+}
