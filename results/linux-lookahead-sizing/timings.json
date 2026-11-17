@@ -1,0 +1,3413 @@
+{
+  "method": {
+    "cli_timing_excludes_setup_and_warmup": true,
+    "counter_executions_separate": true,
+    "hyperfine_runs_per_block": 3,
+    "hyperfine_warmups_per_block": 1,
+    "latency_gate": "Reject a reproducible >5% p99 regression; noisy observations do not establish a strict non-inferiority bound.",
+    "process_timeout_seconds": 30,
+    "runtime": "Tokio current-thread; both endpoints",
+    "timing_includes_process_startup": true,
+    "transport_scope": "TCP loopback or bounded 64KiB in-memory duplex; not a service or network-path benchmark"
+  },
+  "phases": [
+    {
+      "mode": "timing",
+      "name": "final-diag-131072-veyrmux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.349301769,
+            "mean": 0.34530190866666666,
+            "median": 0.34707617,
+            "min": 0.33952778699999997,
+            "stddev": 0.005122858917958065,
+            "system": 0.02887669333333333,
+            "times": [
+              0.33952778699999997,
+              0.34707617,
+              0.349301769
+            ],
+            "user": 0.31632762
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.350077811,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 12268607609.638,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5850.128,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001290445,
+              "latency_p90_secs": 0.001404661,
+              "latency_p99_secs": 0.00148692,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-131072-veyrmux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.8366073407000001,
+            "mean": 0.7468007983666668,
+            "median": 0.7055800817000001,
+            "min": 0.6982149727000001,
+            "stddev": 0.07786188086635888,
+            "system": 0.5722374866666665,
+            "times": [
+              0.6982149727000001,
+              0.8366073407000001,
+              0.7055800817000001
+            ],
+            "user": 0.17445180666666663
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.759694827,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 5653542900.852,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2695.819,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.003006997,
+              "latency_p90_secs": 0.003075666,
+              "latency_p99_secs": 0.003212421,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-131072-yamux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.36201375418000004,
+            "mean": 0.3542535025133334,
+            "median": 0.35131401618,
+            "min": 0.34943273718,
+            "stddev": 0.0067860837098036525,
+            "system": 0.022795493333333333,
+            "times": [
+              0.35131401618,
+              0.36201375418000004,
+              0.34943273718
+            ],
+            "user": 0.3313497066666667
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.354236248,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 12124584427.057,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5781.452,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001369052,
+              "latency_p90_secs": 0.001412881,
+              "latency_p99_secs": 0.001658654,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-131072-yamux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.8652683425400001,
+            "mean": 0.7368838888733334,
+            "median": 0.67334633854,
+            "min": 0.67203698554,
+            "stddev": 0.11118612574771197,
+            "system": 0.5265269,
+            "times": [
+              0.67334633854,
+              0.67203698554,
+              0.8652683425400001
+            ],
+            "user": 0.21023612666666666
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.584604942,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 7346785816.258,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3503.22,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002221729,
+              "latency_p90_secs": 0.002363857,
+              "latency_p99_secs": 0.002740255,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-16384-veyrmux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.31861701908,
+            "mean": 0.31443937308000003,
+            "median": 0.31696824408,
+            "min": 0.30773285608,
+            "stddev": 0.0058662289806674815,
+            "system": 0.008588586666666667,
+            "times": [
+              0.30773285608,
+              0.31861701908,
+              0.31696824408
+            ],
+            "user": 0.3057556733333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.307633902,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13961293823.852,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6657.264,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001138329,
+              "latency_p90_secs": 0.001207177,
+              "latency_p99_secs": 0.001421651,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-16384-veyrmux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.62827472702,
+            "mean": 0.6168870006866666,
+            "median": 0.61270095102,
+            "min": 0.60968532402,
+            "stddev": 0.009976659502706922,
+            "system": 0.44471061999999995,
+            "times": [
+              0.61270095102,
+              0.62827472702,
+              0.60968532402
+            ],
+            "user": 0.17208333999999995
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.601037963,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 7145916831.214,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3407.439,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002295707,
+              "latency_p90_secs": 0.002372236,
+              "latency_p99_secs": 0.002480622,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-16384-yamux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.40538596024000007,
+            "mean": 0.3955149969066667,
+            "median": 0.39394047324000003,
+            "min": 0.38721855724000004,
+            "stddev": 0.009185476390681792,
+            "system": 0.03682423333333334,
+            "times": [
+              0.38721855724000004,
+              0.39394047324000003,
+              0.40538596024000007
+            ],
+            "user": 0.3586523533333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.404117054,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 10628027828.788,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5067.839,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001541638,
+              "latency_p90_secs": 0.001620686,
+              "latency_p99_secs": 0.001913347,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-16384-yamux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 1.2732060914,
+            "mean": 1.1580950680666666,
+            "median": 1.1107185233999999,
+            "min": 1.0903605894,
+            "stddev": 0.10020739562937717,
+            "system": 0.84104914,
+            "times": [
+              1.0903605894,
+              1.2732060914,
+              1.1107185233999999
+            ],
+            "user": 0.31693288000000003
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 1.099165017,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 3907481797.158,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 1863.233,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.004222024,
+              "latency_p90_secs": 0.004420008,
+              "latency_p99_secs": 0.004500688,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-32768-veyrmux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.3310728512,
+            "mean": 0.3269198905333333,
+            "median": 0.3256870082,
+            "min": 0.3239998122,
+            "stddev": 0.003694180465240477,
+            "system": 0.008976526666666667,
+            "times": [
+              0.3256870082,
+              0.3310728512,
+              0.3239998122
+            ],
+            "user": 0.3178785733333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 32768,
+            "data_chunk_bytes": 32768,
+            "elapsed_secs": 0.307926813,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13948013341.729,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6650.931,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001134099,
+              "latency_p90_secs": 0.001218996,
+              "latency_p99_secs": 0.001355124,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 32768,
+            "data_chunk": 32768,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-32768-veyrmux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.6867314741,
+            "mean": 0.6664707477666667,
+            "median": 0.6660188401,
+            "min": 0.6466619291,
+            "stddev": 0.020038594624652475,
+            "system": 0.4735304999999999,
+            "times": [
+              0.6466619291,
+              0.6867314741,
+              0.6660188401
+            ],
+            "user": 0.19270889333333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 32768,
+            "data_chunk_bytes": 32768,
+            "elapsed_secs": 0.861618091,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 4984769169.616,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2376.923,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.003221862,
+              "latency_p90_secs": 0.003365358,
+              "latency_p99_secs": 0.00399695,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 32768,
+            "data_chunk": 32768,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-32768-yamux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.40468285212000005,
+            "mean": 0.4007956774533334,
+            "median": 0.40038387812000004,
+            "min": 0.39732030212,
+            "stddev": 0.003698509110956119,
+            "system": 0.05908418666666667,
+            "times": [
+              0.39732030212,
+              0.40468285212000005,
+              0.40038387812000004
+            ],
+            "user": 0.34161344
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 32768,
+            "data_chunk_bytes": 32768,
+            "elapsed_secs": 0.390908386,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 10987145453.564,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5239.079,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001502988,
+              "latency_p90_secs": 0.001551467,
+              "latency_p99_secs": 0.001582467,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 32768,
+            "data_chunk": 32768,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-32768-yamux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.9494402492400001,
+            "mean": 0.9307222379066667,
+            "median": 0.9295954022400001,
+            "min": 0.9131310622400001,
+            "stddev": 0.018180802625709286,
+            "system": 0.65839114,
+            "times": [
+              0.9131310622400001,
+              0.9494402492400001,
+              0.9295954022400001
+            ],
+            "user": 0.27226264
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 32768,
+            "data_chunk_bytes": 32768,
+            "elapsed_secs": 0.856202609,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 5016297837.513,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2391.957,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.003041607,
+              "latency_p90_secs": 0.00331188,
+              "latency_p99_secs": 0.003417996,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 32768,
+            "data_chunk": 32768,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-65536-veyrmux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.33978510766,
+            "mean": 0.33603971699333335,
+            "median": 0.33662231466,
+            "min": 0.33171172866,
+            "stddev": 0.0040680987144259785,
+            "system": 0.014618520000000001,
+            "times": [
+              0.33662231466,
+              0.33171172866,
+              0.33978510766
+            ],
+            "user": 0.32137782666666664
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 65536,
+            "data_chunk_bytes": 65536,
+            "elapsed_secs": 0.337183474,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 12737775208.995,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6073.845,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001252615,
+              "latency_p90_secs": 0.001352863,
+              "latency_p99_secs": 0.001551797,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 65536,
+            "data_chunk": 65536,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-65536-veyrmux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.7087830611600001,
+            "mean": 0.7022945331600002,
+            "median": 0.7058551221600001,
+            "min": 0.6922454161600001,
+            "stddev": 0.008825064932151882,
+            "system": 0.5104409866666666,
+            "times": [
+              0.7058551221600001,
+              0.6922454161600001,
+              0.7087830611600001
+            ],
+            "user": 0.19173057333333332
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 65536,
+            "data_chunk_bytes": 65536,
+            "elapsed_secs": 0.686413209,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6257116325.394,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2983.626,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.00258997,
+              "latency_p90_secs": 0.002754935,
+              "latency_p99_secs": 0.003208632,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 65536,
+            "data_chunk": 65536,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-65536-yamux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.4061003673,
+            "mean": 0.39864613363333334,
+            "median": 0.3949853603,
+            "min": 0.3948526733,
+            "stddev": 0.006455896616887717,
+            "system": 0.055529913333333326,
+            "times": [
+              0.4061003673,
+              0.3948526733,
+              0.3949853603
+            ],
+            "user": 0.34305357333333336
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 65536,
+            "data_chunk_bytes": 65536,
+            "elapsed_secs": 0.390535437,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 10997637830.239,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5244.082,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.00148527,
+              "latency_p90_secs": 0.001639834,
+              "latency_p99_secs": 0.002086272,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 65536,
+            "data_chunk": 65536,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-diag-65536-yamux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 1.13765330568,
+            "mean": 0.96479418368,
+            "median": 0.9556125016800001,
+            "min": 0.8011167436800001,
+            "stddev": 0.16845605318289036,
+            "system": 0.7211737133333332,
+            "times": [
+              1.13765330568,
+              0.9556125016800001,
+              0.8011167436800001
+            ],
+            "user": 0.24353075999999999
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 65536,
+            "data_chunk_bytes": 65536,
+            "elapsed_secs": 0.674778378,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6365004327.391,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3035.071,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002590329,
+              "latency_p90_secs": 0.002636008,
+              "latency_p99_secs": 0.003509864,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 65536,
+            "data_chunk": 65536,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d131072-c16384-veyrmux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.31983586632,
+            "mean": 0.31369611098666667,
+            "median": 0.31382629132,
+            "min": 0.30742617532,
+            "stddev": 0.0062058696302984264,
+            "system": 0.00565608,
+            "times": [
+              0.30742617532,
+              0.31983586632,
+              0.31382629132
+            ],
+            "user": 0.3079788266666667
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.312857469,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13728191657.78,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6546.112,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001155769,
+              "latency_p90_secs": 0.001242096,
+              "latency_p99_secs": 0.00147374,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d131072-c16384-veyrmux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.65218743774,
+            "mean": 0.6355828444066667,
+            "median": 0.6425284507400001,
+            "min": 0.6120326447400001,
+            "stddev": 0.020959077644816363,
+            "system": 0.46658634666666665,
+            "times": [
+              0.6425284507400001,
+              0.65218743774,
+              0.6120326447400001
+            ],
+            "user": 0.16891053999999997
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.616074112,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6971510752.265,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3324.275,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002325467,
+              "latency_p90_secs": 0.002468364,
+              "latency_p99_secs": 0.003165783,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d131072-c16384-yamux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.3969032293,
+            "mean": 0.3953267259666666,
+            "median": 0.3966761863,
+            "min": 0.39240076230000004,
+            "stddev": 0.002536500476040212,
+            "system": 0.04106173333333333,
+            "times": [
+              0.39240076230000004,
+              0.3966761863,
+              0.3969032293
+            ],
+            "user": 0.3541720933333334
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 0.389464245,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 11027886002.732,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5258.506,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001497199,
+              "latency_p90_secs": 0.001532737,
+              "latency_p99_secs": 0.001689954,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 131072,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d131072-c16384-yamux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 1.2984759159800001,
+            "mean": 1.27832692698,
+            "median": 1.2840905899800001,
+            "min": 1.25241427498,
+            "stddev": 0.023565516147252105,
+            "system": 0.9759876666666666,
+            "times": [
+              1.2840905899800001,
+              1.2984759159800001,
+              1.25241427498
+            ],
+            "user": 0.30210439333333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 131072,
+            "elapsed_secs": 1.077467291,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 3986169540.25,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 1900.754,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.004109917,
+              "latency_p90_secs": 0.004362981,
+              "latency_p99_secs": 0.004899077,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 131072,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d16384-c131072-veyrmux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.37935456206,
+            "mean": 0.37719186772666674,
+            "median": 0.37847445506000005,
+            "min": 0.37374658606000005,
+            "stddev": 0.0030159776864002556,
+            "system": 0.023572833333333335,
+            "times": [
+              0.37935456206,
+              0.37847445506000005,
+              0.37374658606000005
+            ],
+            "user": 0.35355491999999994
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.362349006,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 11853122886.723,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5652.009,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001331863,
+              "latency_p90_secs": 0.001417592,
+              "latency_p99_secs": 0.001577407,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d16384-c131072-veyrmux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.70528967062,
+            "mean": 0.6764937102866667,
+            "median": 0.68293160062,
+            "min": 0.6412598596200001,
+            "stddev": 0.03249675365527991,
+            "system": 0.4824261066666667,
+            "times": [
+              0.68293160062,
+              0.6412598596200001,
+              0.70528967062
+            ],
+            "user": 0.19395210666666665
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.73069048,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 5877957101.617,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2802.828,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002761435,
+              "latency_p90_secs": 0.002887361,
+              "latency_p99_secs": 0.003747388,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d16384-c131072-yamux-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.44444369956,
+            "mean": 0.44305664056000005,
+            "median": 0.44345377656,
+            "min": 0.44127244556,
+            "stddev": 0.001622498300461674,
+            "system": 0.05157967333333333,
+            "times": [
+              0.44345377656,
+              0.44444369956,
+              0.44127244556
+            ],
+            "user": 0.3913912
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.437014717,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 9827969468.589,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 4686.341,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001679585,
+              "latency_p90_secs": 0.001716732,
+              "latency_p99_secs": 0.00181064,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 16384,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-mismatch-d16384-c131072-yamux-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 1.3534339609600001,
+            "mean": 1.3051935626266669,
+            "median": 1.32889373196,
+            "min": 1.23325299496,
+            "stddev": 0.06349913123023657,
+            "system": 0.9469950533333332,
+            "times": [
+              1.23325299496,
+              1.3534339609600001,
+              1.32889373196
+            ],
+            "user": 0.3581155333333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 131072,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 1.325265198,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 3240836100.187,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 1545.351,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.005065841,
+              "latency_p90_secs": 0.005192677,
+              "latency_p99_secs": 0.005854781,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 16384,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-native16-duplex",
+      "order": [
+        "W",
+        "R",
+        "R",
+        "W",
+        "W",
+        "R",
+        "R",
+        "W"
+      ],
+      "records": [
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.32618194066000006,
+            "mean": 0.3259515103266667,
+            "median": 0.32590779866,
+            "min": 0.32576479166000005,
+            "stddev": 0.00021198196716309573,
+            "system": 0.009923226666666665,
+            "times": [
+              0.32590779866,
+              0.32618194066000006,
+              0.32576479166000005
+            ],
+            "user": 0.31596933999999993
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.32675132,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13144452778.339,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6267.764,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001210917,
+              "latency_p90_secs": 0.001284605,
+              "latency_p99_secs": 0.001345864,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.3262694541,
+            "mean": 0.31956048410000004,
+            "median": 0.32261556410000003,
+            "min": 0.3097964341,
+            "stddev": 0.00865102492973521,
+            "system": 0.0094767,
+            "times": [
+              0.3262694541,
+              0.3097964341,
+              0.32261556410000003
+            ],
+            "user": 0.3100197133333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.312675663,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13736173947.123,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6549.918,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001156928,
+              "latency_p90_secs": 0.001233047,
+              "latency_p99_secs": 0.001354543,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 1,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.33228008052,
+            "mean": 0.3205172008533333,
+            "median": 0.32371751252,
+            "min": 0.30555400952,
+            "stddev": 0.013647425172797704,
+            "system": 0.010041813333333332,
+            "times": [
+              0.33228008052,
+              0.30555400952,
+              0.32371751252
+            ],
+            "user": 0.31043304666666666
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.317654758,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13520865618.515,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6447.251,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001182808,
+              "latency_p90_secs": 0.001249776,
+              "latency_p99_secs": 0.001352783,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 2,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.33029159136,
+            "mean": 0.3287389736933333,
+            "median": 0.32864039636000003,
+            "min": 0.32728493336000003,
+            "stddev": 0.0015057510419144082,
+            "system": 0.0065220266666666665,
+            "times": [
+              0.32864039636000003,
+              0.33029159136,
+              0.32728493336000003
+            ],
+            "user": 0.32218277333333334
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.323652614,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13270300038.423,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6327.772,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001198067,
+              "latency_p90_secs": 0.001268635,
+              "latency_p99_secs": 0.001338864,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 3,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.32801640424000006,
+            "mean": 0.32472912324000003,
+            "median": 0.32399033324000004,
+            "min": 0.32218063224000004,
+            "stddev": 0.002987208848920855,
+            "system": 0.009680133333333332,
+            "times": [
+              0.32218063224000004,
+              0.32399033324000004,
+              0.32801640424000006
+            ],
+            "user": 0.3150195
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.314331869,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13663798423.188,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6515.407,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001169948,
+              "latency_p90_secs": 0.001235187,
+              "latency_p99_secs": 0.001310884,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 4,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.32686085402,
+            "mean": 0.3180217696866667,
+            "median": 0.31367842502,
+            "min": 0.31352603002,
+            "stddev": 0.007655250808944157,
+            "system": 0.00608908,
+            "times": [
+              0.31352603002,
+              0.32686085402,
+              0.31367842502
+            ],
+            "user": 0.31188594000000003
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.312189378,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13757570239.946,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6560.121,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001152449,
+              "latency_p90_secs": 0.001250936,
+              "latency_p99_secs": 0.00143161,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 5,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.32516329998,
+            "mean": 0.31659024498,
+            "median": 0.31480475398,
+            "min": 0.30980268098,
+            "stddev": 0.007834420055058364,
+            "system": 0.008269566666666667,
+            "times": [
+              0.31480475398,
+              0.30980268098,
+              0.32516329998
+            ],
+            "user": 0.30825674666666664
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.312667575,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13736529270.744,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6550.088,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001162478,
+              "latency_p90_secs": 0.001236116,
+              "latency_p99_secs": 0.001348983,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 6,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.33038333272,
+            "mean": 0.32493842872,
+            "median": 0.33014054072,
+            "min": 0.31429141272,
+            "stddev": 0.009221385430997224,
+            "system": 0.01028464,
+            "times": [
+              0.33014054072,
+              0.31429141272,
+              0.33038333272
+            ],
+            "user": 0.31459980000000004
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.328816853,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 13061883102.445,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 6228.391,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001214537,
+              "latency_p90_secs": 0.001299225,
+              "latency_p99_secs": 0.001594626,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 7,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-native16-tcp",
+      "order": [
+        "W",
+        "R",
+        "R",
+        "W",
+        "W",
+        "R",
+        "R",
+        "W"
+      ],
+      "records": [
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.69311563046,
+            "mean": 0.6741816044600001,
+            "median": 0.69024371846,
+            "min": 0.63918546446,
+            "stddev": 0.03034154463452109,
+            "system": 0.46599784,
+            "times": [
+              0.69311563046,
+              0.69024371846,
+              0.63918546446
+            ],
+            "user": 0.20811185999999995
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.708669541,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6060606598.019,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2889.922,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002630958,
+              "latency_p90_secs": 0.002873681,
+              "latency_p99_secs": 0.003935712,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.62954604298,
+            "mean": 0.6200335493133334,
+            "median": 0.6248086719800001,
+            "min": 0.60574593298,
+            "stddev": 0.012598121144214769,
+            "system": 0.45221286666666666,
+            "times": [
+              0.60574593298,
+              0.62954604298,
+              0.6248086719800001
+            ],
+            "user": 0.16774574666666667
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.641330761,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6696961314.163,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3193.36,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002418545,
+              "latency_p90_secs": 0.00254209,
+              "latency_p99_secs": 0.003198842,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 1,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.6300049090400001,
+            "mean": 0.6163679457066668,
+            "median": 0.61324464804,
+            "min": 0.6058542800400001,
+            "stddev": 0.012374548941673159,
+            "system": 0.43735623999999995,
+            "times": [
+              0.61324464804,
+              0.6058542800400001,
+              0.6300049090400001
+            ],
+            "user": 0.17891267999999996
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.61759278,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6954367724.312,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3316.101,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002350615,
+              "latency_p90_secs": 0.002433413,
+              "latency_p99_secs": 0.003029737,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 2,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.71387559448,
+            "mean": 0.6931425438133334,
+            "median": 0.7116624534800001,
+            "min": 0.6538895834800001,
+            "stddev": 0.03401206652747151,
+            "system": 0.4963608533333333,
+            "times": [
+              0.7116624534800001,
+              0.71387559448,
+              0.6538895834800001
+            ],
+            "user": 0.19669280666666664
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.710550769,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6044560759.599,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2882.271,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002690237,
+              "latency_p90_secs": 0.002787444,
+              "latency_p99_secs": 0.00331411,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 3,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.7245378455,
+            "mean": 0.6639343748333334,
+            "median": 0.6412195225,
+            "min": 0.6260457565,
+            "stddev": 0.053029673639292105,
+            "system": 0.4683448066666666,
+            "times": [
+              0.7245378455,
+              0.6412195225,
+              0.6260457565
+            ],
+            "user": 0.19548824666666667
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.689927293,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6225246253.593,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 2968.429,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002614759,
+              "latency_p90_secs": 0.002741435,
+              "latency_p99_secs": 0.003424967,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 4,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.62760915252,
+            "mean": 0.6219518845200002,
+            "median": 0.6224719435200001,
+            "min": 0.6157745575200001,
+            "stddev": 0.00593441283751954,
+            "system": 0.44814010666666665,
+            "times": [
+              0.62760915252,
+              0.6157745575200001,
+              0.6224719435200001
+            ],
+            "user": 0.1737270333333333
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.586709565,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 7320431696.047,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3490.654,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002227889,
+              "latency_p90_secs": 0.002327827,
+              "latency_p99_secs": 0.002677927,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 5,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.63276224608,
+            "mean": 0.6247910867466667,
+            "median": 0.62604847908,
+            "min": 0.61556253508,
+            "stddev": 0.008668523013225723,
+            "system": 0.4539609866666667,
+            "times": [
+              0.61556253508,
+              0.62604847908,
+              0.63276224608
+            ],
+            "user": 0.17073835333333331
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.644009078,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6669109866.181,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3180.079,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002435283,
+              "latency_p90_secs": 0.00254892,
+              "latency_p99_secs": 0.003202723,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 6,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        {
+          "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+          "hyperfine": {
+            "command": "W",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.68823643634,
+            "mean": 0.65924902534,
+            "median": 0.64478917434,
+            "min": 0.64472146534,
+            "stddev": 0.025103857143661413,
+            "system": 0.46986513999999996,
+            "times": [
+              0.64478917434,
+              0.68823643634,
+              0.64472146534
+            ],
+            "user": 0.1893251066666667
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.67909577,
+            "engine": "veyrmux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 6324538431.45,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 3015.775,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.002585459,
+              "latency_p90_secs": 0.002691746,
+              "latency_p99_secs": 0.003222402,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 7,
+          "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17",
+          "variant": "W",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-stock16-duplex",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 0.39952408010000007,
+            "mean": 0.39711130876666667,
+            "median": 0.3975434131,
+            "min": 0.39426643310000004,
+            "stddev": 0.002655324577206411,
+            "system": 0.032032899999999996,
+            "times": [
+              0.39952408010000007,
+              0.39426643310000004,
+              0.3975434131
+            ],
+            "user": 0.36494067333333335
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 0.391679795,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 10965506392.792,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 5228.761,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "duplex",
+            "uniform": {
+              "latency_p50_secs": 0.001493849,
+              "latency_p90_secs": 0.001555517,
+              "latency_p99_secs": 0.001763442,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "timing",
+      "name": "final-stock16-tcp",
+      "order": [
+        "R"
+      ],
+      "records": [
+        {
+          "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+          "hyperfine": {
+            "command": "R",
+            "exit_codes": [
+              0,
+              0,
+              0
+            ],
+            "max": 1.16531756242,
+            "mean": 1.1138425257533333,
+            "median": 1.09978121342,
+            "min": 1.07642880142,
+            "stddev": 0.04608246235207537,
+            "system": 0.8175124,
+            "times": [
+              1.16531756242,
+              1.07642880142,
+              1.09978121342
+            ],
+            "user": 0.2962376466666667
+          },
+          "observation": {
+            "bulk": null,
+            "bulk_elapsed_secs": null,
+            "bulk_goodput_bytes_per_sec": null,
+            "byte_accounting": "actual successful request plus echo payload; excludes warmup and frame headers; bulk goodput counts request direction only",
+            "caller_chunk_bytes": 16384,
+            "data_chunk_bytes": 16384,
+            "elapsed_secs": 1.289097357,
+            "engine": "yamux",
+            "interactive": null,
+            "interactive_payload_bytes_per_direction": 64,
+            "interactive_requests_completed_during_bulk": 0,
+            "latency_distribution": "per-class successful stream-open-to-byte-validated-echo-EOF exchanges; nearest-rank; seconds; uniform is not interactive latency",
+            "payload_bytes": 4294967296,
+            "payload_bytes_per_sec": 3331763324.684,
+            "payload_bytes_per_stream_per_direction": 1048576,
+            "receive_window_bytes": 262144,
+            "requests": 2048,
+            "requests_per_sec": 1588.709,
+            "rounds": 256,
+            "runtime": "tokio-current-thread; both endpoints",
+            "scenario": "uniform",
+            "startup_included": false,
+            "stream_cap": 64,
+            "streams": 8,
+            "transport": "tcp",
+            "uniform": {
+              "latency_p50_secs": 0.004988094,
+              "latency_p90_secs": 0.005101341,
+              "latency_p99_secs": 0.005619776,
+              "latency_samples": 2048,
+              "payload_bytes": 4294967296,
+              "requests": 2048
+            },
+            "warmup_bytes": 4096
+          },
+          "position": 0,
+          "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+          "variant": "R",
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "yamux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "variants": {
+    "R": {
+      "architecture": "x86_64",
+      "baseline_revision": "413c794241db2d2609289b319fb37972aa7be32b",
+      "binary": "bin/R-04b9a6e4eb73a763",
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "build": {
+        "CARGO_ENCODED_RUSTFLAGS": "",
+        "CARGO_INCREMENTAL": "0",
+        "RUSTFLAGS": "",
+        "codegen_units": 1,
+        "command": "cargo build --locked --release --example bench",
+        "fresh_root_compile_confirmed": true,
+        "lto": "thin",
+        "profile": "release"
+      },
+      "cli": "explicit",
+      "declared_distinct_from": [
+        "W"
+      ],
+      "label": "R",
+      "os": "Linux",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)\nbinary: rustc\ncommit-hash: 0ef1bc386059596dada8fb65b50425aab2ea637a\ncommit-date: 2026-11-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0\nLLVM version: 23.1.5",
+      "source_directory": "sources/R",
+      "source_file_sha256": {
+        ".github/workflows/check.yml": "1bdc51d5a8cdbfd460fd103688fd7d69d4f13815280d42b4a784077805efb547",
+        ".gitignore": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "LICENSE": "17356f9b12372fdc904c160aa0a01ce03d49f70668c1a1674faffd167ba58168",
+        "README.md": "36be2dfb7b20ff184bf9b9573308950300c3b31e83ac482388d6b6c52c1edcde",
+        "benches/transport.rs": "b0c81152ed4a21ae3197994ab5961d38fa1e07266456f9fce99a97e10ca96049",
+        "examples/bench.rs": "8824598c55e0c3c6a6a3c8f132d9c8df8287269783e1cd54366ddb8cdaedd28d",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "c52b65a377173b9717e605f104e38abee55b7ca7ec26a418c933953185a13336",
+        "scripts/bench.sh": "1c75743a9c499345612c2559d8b8766fc5ba614e66448f3e9e7dd1c1ee497ccd",
+        "scripts/preflight.sh": "e544c4c058d88be15850a98ee4807b9b2fababfceb11f694a18cf0072d5ecbd2",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "b75ad897f598e6408d36b77634b7bcf049d075ddf5567cabd8507054d971906a",
+        "src/session/lookahead_tests.rs": "830895a6a026a6a3b7e813ae27c0a46e680e2e9b3cc9453f8426d2f51076a7ed",
+        "src/session/receive_tests.rs": "d866d501e3d62dfc48fdd22e6df5c43400673ae2af5fb3b8b0e14b98c42cf852",
+        "src/stream.rs": "5471bf68d7e37a2e20ef24ce5441163a797ac7e886d5d4d5109a4f22d764a68e",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "07f6910da75deb5c1324992d6269100c39e2c5ce56be141f2354abed3dda08b7",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/sizing.rs": "7ff50accdd78599e5a1b3bce3637391cd7755b4b9dfcb110abd2b932f5299ecf",
+        "tests/support/mod.rs": "a667fa3bcdc4c0b889fc5cbc0f2e80e6f2bfbbeab6deed874f95ada45a955691",
+        "tests/vectored.rs": "77df4eb203681541235e5ab2fff860e5de0847b9630e0ef2c20c325d6c3fa61d",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1"
+    },
+    "W": {
+      "architecture": "x86_64",
+      "baseline_revision": "413c794241db2d2609289b319fb37972aa7be32b",
+      "binary": "bin/W-220c748bb4a6006f",
+      "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+      "build": {
+        "CARGO_ENCODED_RUSTFLAGS": "",
+        "CARGO_INCREMENTAL": "0",
+        "RUSTFLAGS": "",
+        "codegen_units": 1,
+        "command": "cargo build --locked --release --example bench",
+        "fresh_root_compile_confirmed": true,
+        "lto": "thin",
+        "profile": "release"
+      },
+      "cli": "explicit",
+      "declared_distinct_from": [
+        "U"
+      ],
+      "label": "W",
+      "os": "Linux",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)\nbinary: rustc\ncommit-hash: 0ef1bc386059596dada8fb65b50425aab2ea637a\ncommit-date: 2026-11-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0\nLLVM version: 23.1.5",
+      "source_directory": "sources/W",
+      "source_file_sha256": {
+        ".github/workflows/check.yml": "1bdc51d5a8cdbfd460fd103688fd7d69d4f13815280d42b4a784077805efb547",
+        ".gitignore": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "LICENSE": "17356f9b12372fdc904c160aa0a01ce03d49f70668c1a1674faffd167ba58168",
+        "README.md": "335d3c059d30ac436dc4382144bde15fc543c453f44e8a58e269b20b77351470",
+        "benches/transport.rs": "b0c81152ed4a21ae3197994ab5961d38fa1e07266456f9fce99a97e10ca96049",
+        "examples/bench.rs": "8824598c55e0c3c6a6a3c8f132d9c8df8287269783e1cd54366ddb8cdaedd28d",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "c52b65a377173b9717e605f104e38abee55b7ca7ec26a418c933953185a13336",
+        "scripts/bench.sh": "1c75743a9c499345612c2559d8b8766fc5ba614e66448f3e9e7dd1c1ee497ccd",
+        "scripts/preflight.sh": "e544c4c058d88be15850a98ee4807b9b2fababfceb11f694a18cf0072d5ecbd2",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "49efae84aabb62cc87f3c81537f71ea8d03496b6cc77f5ff11919e21c82cd371",
+        "src/session/receive_tests.rs": "d866d501e3d62dfc48fdd22e6df5c43400673ae2af5fb3b8b0e14b98c42cf852",
+        "src/stream.rs": "5471bf68d7e37a2e20ef24ce5441163a797ac7e886d5d4d5109a4f22d764a68e",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "2fa3be9b6b2d16b44928c05f9b132f7b662b36f4343705caf89c720a5c16399d",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/sizing.rs": "f7c9a2f11937b337da397eac9b24e7415822a474c1b2dc7b157953c9acd71fd1",
+        "tests/support/mod.rs": "a667fa3bcdc4c0b889fc5cbc0f2e80e6f2bfbbeab6deed874f95ada45a955691",
+        "tests/vectored.rs": "26e7562fb949a3178572aeec3ab22d0053ef615aa0408f1c39e1716ecfba860f",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17"
+    }
+  }
+}

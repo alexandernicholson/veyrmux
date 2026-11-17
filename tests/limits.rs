@@ -51,7 +51,17 @@ async fn invalid_limits_fail_before_creating_a_stream() {
     no_send_credit.set_max_send_window(256 * 1024 - 1);
     let mut no_frame_space = Config::default();
     no_frame_space.set_max_pending_bytes(12);
-    for config in [no_streams, no_send_credit, no_frame_space] {
+    let mut no_payload = Config::default();
+    no_payload.set_split_send_size(0);
+    let mut oversized_payload = Config::default();
+    oversized_payload.set_split_send_size(256 * 1024 + 1);
+    for config in [
+        no_streams,
+        no_send_credit,
+        no_frame_space,
+        no_payload,
+        oversized_payload,
+    ] {
         let (transport, _peer) = tokio::io::duplex(128);
         let mut connection = Connection::new(transport, config, Mode::Client);
         assert!(matches!(

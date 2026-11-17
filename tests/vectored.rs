@@ -114,8 +114,9 @@ impl Fixture {
             pending: false,
             fault,
         };
-        let mut connection =
-            veyrmux::Connection::new(socket, veyrmux::Config::default(), veyrmux::Mode::Client);
+        let mut config = veyrmux::Config::default();
+        config.set_split_send_size(bytes.max(16 * 1024));
+        let mut connection = veyrmux::Connection::new(socket, config, veyrmux::Mode::Client);
         let mut handles = Vec::new();
         let mut expected = Vec::new();
         for n in 0..streams {
@@ -182,7 +183,7 @@ async fn partial_vectored_writes_cross_headers_without_duplication_or_loss() {
 
 #[tokio::test]
 async fn descriptor_and_byte_limits_bound_each_write_batch() {
-    for (streams, bytes) in [(32, 64), (6, 16384)] {
+    for (streams, bytes) in [(32, 64), (6, 16384), (6, 128 * 1024), (1, 256 * 1024)] {
         let mut fixture = Fixture::new(streams, bytes, usize::MAX, false, Fault::None).await;
         fixture.drain().await;
         let capture = fixture.capture.lock().unwrap();
@@ -211,4 +212,29 @@ async fn broken_vectored_writers_fail_only_the_connection() {
         assert!(matches!(outcome, Some(Err(_))));
         assert!(fixture._streams[0].write_all(b"closed").await.is_err());
     }
+}
+
+#[tokio::test]
+async fn partial_large_frames_preserve_bytes_and_do_not_finish_flush_early() {
+    let mut fixture = Fixture::new(1, 128 * 1024, 65536, true, Fault::None).await;
+    poll_fn(|cx| {
+        assert!(fixture.connection.poll_next_inbound(cx).is_pending());
+        assert!(
+            Pin::new(&mut fixture._streams[0])
+                .poll_flush(cx)
+                .is_pending()
+        );
+        Poll::Ready(())
+    })
+    .await;
+    assert_eq!(fixture.capture.lock().unwrap().wire.len(), 128 * 1024);
+    fixture.drain().await;
+    timeout(Duration::from_secs(3), fixture._streams[0].flush())
+        .await
+        .unwrap()
+        .unwrap();
+    let capture = fixture.capture.lock().unwrap();
+    assert_eq!(capture.wire, fixture.expected);
+    assert!(capture.vectors.iter().all(|&(_, bytes)| bytes <= 65536));
+    drop(capture);
 }

@@ -6,7 +6,10 @@ stage=${1:-all}
 case "$stage" in
   fmt) cargo fmt --all -- --check ;;
   clippy) cargo clippy --all-targets --all-features -- -D warnings -W clippy::nursery ;;
-  test) cargo test --all-features ;;
+  test)
+    cargo test --all-features
+    cargo test --all-features --examples
+    ;;
   all)
     "$0" fmt
     "$0" clippy

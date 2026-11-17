@@ -63,6 +63,7 @@ pub struct Config {
     receive_budget: Option<usize>,
     pub(crate) pending_budget: usize,
     max_send_window: usize,
+    pub(crate) split_send_size: usize,
     pub(crate) eager_open: bool,
 }
 impl Default for Config {
@@ -72,6 +73,7 @@ impl Default for Config {
             receive_budget: None,
             pending_budget: 1024 * 1024,
             max_send_window: u32::MAX as usize,
+            split_send_size: WRITE_FRAME,
             eager_open: true,
         }
     }
@@ -104,6 +106,13 @@ impl Config {
         self.max_send_window = max;
         self
     }
+    /// Bound each outgoing DATA payload, independently of the receive window.
+    /// Valid sizes are 1..=256 KiB; the default is 16 KiB.
+    /// Invalid limits are rejected when opening or driving the connection.
+    pub const fn set_split_send_size(&mut self, bytes: usize) -> &mut Self {
+        self.split_send_size = bytes;
+        self
+    }
     fn stream_limit(&self) -> usize {
         self.receive_budget.map_or(self.max_streams, |budget| {
             self.max_streams.min(budget / WINDOW as usize)
@@ -113,6 +122,8 @@ impl Config {
         self.pending_budget > HEADER_LEN
             && self.max_streams != 0
             && self.max_send_window >= WINDOW as usize
+            && self.split_send_size != 0
+            && self.split_send_size <= WINDOW as usize
     }
 }
 
@@ -674,7 +685,8 @@ impl<T: AsyncRead + AsyncWrite + Unpin> Connection<T> {
                 let mut total = 0;
                 for (slot, frame) in vectors.iter_mut().zip(&self.current) {
                     let bytes = frame.wire.as_slice();
-                    if count != 0 && total + bytes.len() > MAX_WRITE_BATCH_BYTES {
+                    let bytes = &bytes[..bytes.len().min(MAX_WRITE_BATCH_BYTES)];
+                    if total + bytes.len() > MAX_WRITE_BATCH_BYTES {
                         break;
                     }
                     *slot = IoSlice::new(bytes);
@@ -690,6 +702,7 @@ impl<T: AsyncRead + AsyncWrite + Unpin> Connection<T> {
                 )
             } else {
                 let bytes = first.wire.as_slice();
+                let bytes = &bytes[..bytes.len().min(MAX_WRITE_BATCH_BYTES)];
                 (Pin::new(&mut self.io).poll_write(cx, bytes), bytes.len())
             };
             match result {
@@ -772,72 +785,81 @@ impl<T: AsyncRead + AsyncWrite + Unpin> Connection<T> {
         cx: &mut Context<'_>,
     ) -> Result<Poll<Option<(Header, BytesMut)>>, ConnectionError> {
         while self.incoming.is_none() {
-            let mut read = ReadBuf::new(&mut self.header[self.header_bytes..]);
-            match Pin::new(&mut self.io).poll_read(cx, &mut read) {
-                Poll::Pending => return Ok(Poll::Pending),
-                Poll::Ready(Err(error)) => return Err(error.into()),
-                Poll::Ready(Ok(())) => {
-                    let n = read.filled().len();
-                    if n == 0 {
-                        return if self.header_bytes == 0 {
-                            Ok(Poll::Ready(None))
-                        } else {
-                            Err(ConnectionError::Protocol("EOF inside frame header"))
-                        };
-                    }
-                    self.header_bytes += n;
-                    if self.header_bytes != HEADER_LEN {
-                        continue;
-                    }
-                    let header = Header::decode(&self.header)?;
-                    self.header_bytes = 0;
-                    if header.kind != FrameType::Data {
-                        return Ok(Poll::Ready(Some((header, BytesMut::new()))));
-                    }
-                    if header.flags & SYN != 0 {
-                        let peer_odd = self.mode == Mode::Server;
-                        if (header.stream_id % 2 == 1) != peer_odd
-                            || header.flags & (ACK | RST) != 0
-                        {
-                            return Err(ConnectionError::Protocol("invalid peer SYN"));
+            while self.header_bytes < HEADER_LEN {
+                let mut read = ReadBuf::new(&mut self.header[self.header_bytes..]);
+                match Pin::new(&mut self.io).poll_read(cx, &mut read) {
+                    Poll::Pending => return Ok(Poll::Pending),
+                    Poll::Ready(Err(error)) => return Err(error.into()),
+                    Poll::Ready(Ok(())) => {
+                        let n = read.filled().len();
+                        if n == 0 {
+                            return if self.header_bytes == 0 {
+                                Ok(Poll::Ready(None))
+                            } else {
+                                Err(ConnectionError::Protocol("EOF inside frame header"))
+                            };
                         }
+                        self.header_bytes += n;
                     }
-                    if header.flags & RST != 0 && (header.flags != RST || header.value != 0) {
-                        return Err(ConnectionError::Protocol("invalid reset"));
-                    }
-                    let length = header.value as usize;
-                    if length > MAX_FRAME || length > WINDOW as usize {
-                        return Err(ConnectionError::Protocol(
-                            "data frame exceeds receive window",
-                        ));
-                    }
-                    {
-                        let shared = lock(&self.shared);
-                        if let Some(stream) = shared.streams.get(&header.stream_id) {
-                            if header.value > stream.receive_credit {
-                                return Err(ConnectionError::Protocol(
-                                    "peer exceeded receive credit",
-                                ));
-                            }
-                            if stream.remote_fin && header.value != 0 {
-                                return Err(ConnectionError::Protocol("data after FIN"));
-                            }
-                        }
-                    }
-                    // A delivered payload must not share a reusable driver's allocation.
-                    self.body = BytesMut::with_capacity(length);
-                    self.incoming = Some(header);
                 }
             }
+            // A complete prefetched header must be decoded without a zero-length read.
+            let header = Header::decode(&self.header)?;
+            self.header_bytes = 0;
+            if header.kind != FrameType::Data {
+                return Ok(Poll::Ready(Some((header, BytesMut::new()))));
+            }
+            if header.flags & SYN != 0 {
+                let peer_odd = self.mode == Mode::Server;
+                if (header.stream_id % 2 == 1) != peer_odd || header.flags & (ACK | RST) != 0 {
+                    return Err(ConnectionError::Protocol("invalid peer SYN"));
+                }
+            }
+            if header.flags & RST != 0 && (header.flags != RST || header.value != 0) {
+                return Err(ConnectionError::Protocol("invalid reset"));
+            }
+            let length = header.value as usize;
+            if length > MAX_FRAME || length > WINDOW as usize {
+                return Err(ConnectionError::Protocol(
+                    "data frame exceeds receive window",
+                ));
+            }
+            {
+                let shared = lock(&self.shared);
+                if let Some(stream) = shared.streams.get(&header.stream_id) {
+                    if header.flags & SYN != 0 {
+                        return Err(ConnectionError::Protocol(
+                            "invalid peer SYN or duplicate active stream ID",
+                        ));
+                    }
+                    if header.value > stream.receive_credit {
+                        return Err(ConnectionError::Protocol("peer exceeded receive credit"));
+                    }
+                    if stream.remote_fin && header.value != 0 {
+                        return Err(ConnectionError::Protocol("data after FIN"));
+                    }
+                    if !stream.reset && stream.remote_fin && header.flags & FIN != 0 {
+                        return Err(ConnectionError::Protocol("duplicate FIN"));
+                    }
+                }
+            }
+            // Each delivered payload owns its allocation; only a header-sized tail
+            // may be read ahead, and empty DATA frames need no allocation or I/O.
+            self.body = if length == 0 {
+                BytesMut::new()
+            } else {
+                BytesMut::with_capacity(length + HEADER_LEN)
+            };
+            self.incoming = Some(header);
         }
         let Some(expected) = self.incoming.as_ref().map(|header| header.value as usize) else {
             return Err(ConnectionError::Protocol("missing data header"));
         };
         while self.body.len() < expected {
             // Tokio's cancel-safe read_buf advances only initialized bytes.
-            // Limiting spare capacity prevents reading into the following frame.
+            // Never wait for lookahead: one successful read can finish the payload.
             let remaining = expected - self.body.len();
-            let mut destination = (&mut self.body).limit(remaining);
+            let mut destination = (&mut self.body).limit(remaining + HEADER_LEN);
             let read = self.io.read_buf(&mut destination);
             let mut read = std::pin::pin!(read);
             match read.as_mut().poll(cx) {
@@ -852,6 +874,9 @@ impl<T: AsyncRead + AsyncWrite + Unpin> Connection<T> {
         let Some(header) = self.incoming.take() else {
             return Err(ConnectionError::Protocol("missing data header"));
         };
+        self.header_bytes = self.body.len() - expected;
+        self.header[..self.header_bytes].copy_from_slice(&self.body[expected..]);
+        self.body.truncate(expected);
         Ok(Poll::Ready(Some((header, std::mem::take(&mut self.body)))))
     }
 
@@ -1033,9 +1058,7 @@ impl<T> Drop for Connection<T> {
     }
 }
 
-pub const fn write_frame_limit() -> usize {
-    WRITE_FRAME
-}
-
+#[cfg(test)]
+mod lookahead_tests;
 #[cfg(test)]
 mod receive_tests;

@@ -14,8 +14,9 @@ reliable, ordered byte transport.
 - Data-frame headers and bodies are coalesced into contiguous writes.
 - Bounded vectored writes group queued frames into at most 16 descriptors and
   64 KiB per call. Non-vectored transports retain the single-frame path.
-- Receive storage is single-owner. Small payloads are coalesced into bounded
-  per-stream chunks.
+- Receive storage is single-owner. Payload reads may prefetch at most the next
+  12-byte header, without waiting for it or reading an unvalidated payload.
+  Small payloads are coalesced into bounded per-stream chunks.
 - Receive credit, active streams and pending send bytes have explicit limits.
   Reading data returns credit; reaching stream EOF does not close the opposite
   direction. Dropping an unfinished stream resets it.
@@ -31,6 +32,11 @@ Create `Connection::new(transport, config, Mode::Client)` or `Mode::Server`.
 Continuously poll `poll_next_inbound` while any streams are in use, including
 outbound-only sessions; this advances reads, writes and control frames.
 `poll_new_outbound` opens a stream and `poll_close` closes a session.
+
+`Config::set_split_send_size(bytes)` bounds outgoing DATA payloads independently
+of receive credit. The default remains 16 KiB; valid limits are 1..=256 KiB.
+Caller slices, available credit and the queued-byte budget can shorten a frame.
+Invalid configuration is rejected when opening or driving the connection.
 
 The optional `futures-compat` feature exposes the equivalent Futures I/O adapter
 under `veyrmux::yamux_shim`. It exists for migration from the `yamux` crate; it
@@ -60,20 +66,62 @@ timeouts.
 cargo run --release --example bench -- veyrmux 1048576 8 16 tcp
 cargo run --release --example bench -- yamux 1048576 8 16 tcp
 ./scripts/bench.sh 1048576 8 16 tcp
+./scripts/bench.sh 1048576 8 256 tcp --data-chunk 65536 --caller-chunk 65536
+cargo run --release --example bench -- veyrmux 1048576 8 256 tcp --scenario mixed
 cargo bench --bench transport
 ```
 
-Both engines use matching windows, stream counts and payloads. The echo workload
-validates every byte and EOF; setup and warmup are excluded from its internal
-elapsed time. Hyperfine separately measures complete process runtime, including
-startup; those two measurements are not interchangeable. Generated runs are
-stored in unique directories under `results/`.
+Both engines use matching windows, DATA limits, caller buffers, stream counts
+and payloads. DATA and caller chunks are independent options; both default to
+16 KiB. `mixed` runs one bulk worker alongside the remaining 64-byte closed-loop
+requesters and reports interactive latency separately from bulk goodput.
+This is a fixed-concurrency contention control, not a fixed arrival-rate test.
+The echo workload validates every byte and EOF; setup and warmup are excluded
+from its internal elapsed time. Hyperfine separately measures complete process
+runtime, including startup; those two measurements are not interchangeable.
+Generated runs are stored in unique directories under `results/`.
 
 `examples/simd_probe.rs` evaluates `fearless_simd`'s safe portable copy against
 `copy_from_slice` with identical buffers. SIMD is a benchmark dependency, not a
 runtime dependency whose performance is assumed. Payloads remain opaque.
 
 ### Current release measurements: Linux x86_64
+
+Rust 1.100.0, release thin LTO, one Tokio current-thread runtime for both
+endpoints. Reference: Yamux 0.13.10. Each process validates 4 GiB: 1 MiB request
+and echo, eight streams, 256 rounds. Both DATA and caller chunks are 16 KiB.
+TCP is loopback; these are not remote-service or network-capacity measurements.
+
+The native before/after comparison isolates bounded header lookahead with the
+same corrected harness. Two interleaved ABBA blocks, one warmup and three
+measurements per block give 12 timed processes per native variant; the stock
+reference has three. Times include process startup.
+
+| Transport | Before, ms ± σ | After, ms ± σ | Yamux, ms ± σ | Native change |
+|---|---:|---:|---:|---:|
+| TCP loopback | 672.6 ± 34.5 | 620.8 ± 9.3 | 1113.8 ± 46.1 | −7.7% |
+| Bounded in-memory duplex | 326.1 ± 4.5 | 318.7 ± 8.5 | 397.1 ± 2.7 | −2.3% |
+
+Separate TCP counter executions recorded 44.1% fewer `recvfrom` calls.
+Small-message and mixed interactive controls used 20 processes per condition.
+No stable greater-than-5% p99 regression was observed; the small-duplex paired
+interval remains wide, so this does not establish a strict latency bound.
+
+Prefix packing plus queue refills was rejected: TCP slowed despite fewer writes,
+and combining it with lookahead lost to lookahead alone. Matched 32/64/128 KiB
+DATA/caller sweeps were slower for Veyrmux than 16 KiB; 128 KiB also worsened tail
+controls. Defaults remain unchanged. Scalar and vectored offers still obey the
+64 KiB cap when larger DATA sizes are explicitly configured.
+
+Source/binary fingerprints, raw timings, per-class observations, counters,
+rejected variants and uncertainty are in
+[`results/linux-lookahead-sizing/`](results/linux-lookahead-sizing/).
+The harness lifecycle correction is recorded separately, not credited to the
+runtime algorithm. Cross-capture deltas against the previous baseline are in
+[`summary.json`](results/linux-lookahead-sizing/summary.json); historical ratios
+below must not be chained into a new release claim.
+
+### Previous receive-storage baseline: Linux x86_64
 
 Rust 1.100.0, release thin LTO, one Tokio current-thread runtime for both
 endpoints. Reference: Yamux 0.13.10. One process validates 4 GiB of payload:
@@ -90,8 +138,8 @@ and 5.66 versus 11.61 billion instructions. Single counter pairs are not
 confidence intervals. Exact parameters, source fingerprints, observations
 and counters: [`results/linux-selected/`](results/linux-selected/).
 
-The current implementation uses independently owned receive buffers and
-bounded small-payload coalescing. Earlier measurements below predate this
+That baseline uses independently owned receive buffers and bounded small-payload
+coalescing, before header lookahead. Earlier measurements below predate that
 storage design; their ratios must not be chained into a release claim.
 
 ### Bounded-write batching baseline: Linux x86_64

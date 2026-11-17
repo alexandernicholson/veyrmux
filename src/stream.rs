@@ -1,6 +1,6 @@
 //! Application streams share only bounded queues and synchronous state locks.
 use crate::frame::{FrameType, HEADER_LEN, Header, SYN};
-use crate::session::{Shared, StreamId, WINDOW, lock, remember, write_frame_limit};
+use crate::session::{Shared, StreamId, WINDOW, lock, remember};
 use bytes::Buf;
 use std::fmt;
 use std::io;
@@ -102,6 +102,7 @@ impl AsyncWrite for Stream {
             .pending_budget
             .saturating_sub(shared.queued_bytes)
             .saturating_sub(HEADER_LEN);
+        let split_send_size = shared.config.split_send_size;
         let Some(stream) = shared.streams.get_mut(&self.id) else {
             return Poll::Ready(Err(io::Error::new(
                 io::ErrorKind::BrokenPipe,
@@ -116,7 +117,7 @@ impl AsyncWrite for Stream {
         }
         let length = data
             .len()
-            .min(write_frame_limit())
+            .min(split_send_size)
             .min(stream.send_credit as usize)
             .min(available);
         if length == 0 {

@@ -9,7 +9,7 @@ pub mod support;
 use std::time::Duration;
 
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use support::{Engine, Transport, Workload};
+use support::{CHUNK, Engine, Scenario, Transport, Workload};
 
 fn transport(c: &mut Criterion) {
     let runtime = tokio::runtime::Builder::new_current_thread()
@@ -21,10 +21,21 @@ fn transport(c: &mut Criterion) {
         group.sample_size(10);
         group.warm_up_time(Duration::from_secs(1));
         group.measurement_time(Duration::from_secs(3));
-        for (label, payload, streams) in [
-            ("latency-64B-1stream", 64, 1),
-            ("bulk-1MiB-1stream", 1024 * 1024, 1),
-            ("bulk-1MiB-8streams", 1024 * 1024, 8),
+        for (label, payload, streams, data_chunk, caller_chunk) in [
+            ("latency-64B-1stream", 64, 1, CHUNK, CHUNK),
+            ("bulk-1MiB-1stream", 1024 * 1024, 1, CHUNK, CHUNK),
+            ("bulk-1MiB-8streams", 1024 * 1024, 8, CHUNK, CHUNK),
+            ("bulk-1MiB-8streams-D32K-C32K", 1024 * 1024, 8, 32768, 32768),
+            ("bulk-1MiB-8streams-D64K-C64K", 1024 * 1024, 8, 65536, 65536),
+            (
+                "bulk-1MiB-8streams-D128K-C128K",
+                1024 * 1024,
+                8,
+                131072,
+                131072,
+            ),
+            ("bulk-1MiB-8streams-D16K-C64K", 1024 * 1024, 8, CHUNK, 65536),
+            ("bulk-1MiB-8streams-D64K-C16K", 1024 * 1024, 8, 65536, CHUNK),
         ] {
             group.throughput(Throughput::Bytes((2 * payload * streams) as u64));
             for engine in [Engine::Veyrmux, Engine::Yamux] {
@@ -36,6 +47,9 @@ fn transport(c: &mut Criterion) {
                                 transport,
                                 payload,
                                 streams,
+                                data_chunk,
+                                caller_chunk,
+                                scenario: Scenario::Uniform,
                                 rounds: usize::try_from(rounds)
                                     .expect("Criterion iteration count fits usize"),
                             }))

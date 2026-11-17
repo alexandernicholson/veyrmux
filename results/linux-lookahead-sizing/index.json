@@ -1,0 +1,249 @@
+{
+  "defaults": {
+    "caller_chunk_bytes": 16384,
+    "data_chunk_bytes": 16384
+  },
+  "files": {
+    "counters.json": "Separate final perf executions.",
+    "harness-lifecycle.json": "Uniform benchmark-lifecycle ablation; not a runtime algorithm claim.",
+    "latency.json": "All final per-process small, single-bulk and mixed observations.",
+    "original-harness.json": "Original-harness reader/packer comparisons and small-duplex precision probe.",
+    "summary.json": "Decisions, before/after deltas, sizing and per-class latency summaries.",
+    "timings.json": "All final Hyperfine samples and direct warmed observations.",
+    "verification.json": "Final post-measurement compiler/lint/test and CLI acceptance."
+  },
+  "publication_boundary": "Standalone multiplexing workloads only; raw profiles, machines and execution paths are not included.",
+  "recorded_phase_lookup": {
+    "results/final-diag-131072-veyrmux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-131072-veyrmux-duplex"
+    },
+    "results/final-diag-131072-veyrmux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-131072-veyrmux-tcp"
+    },
+    "results/final-diag-131072-yamux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-131072-yamux-duplex"
+    },
+    "results/final-diag-131072-yamux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-131072-yamux-tcp"
+    },
+    "results/final-diag-16384-veyrmux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-16384-veyrmux-duplex"
+    },
+    "results/final-diag-16384-veyrmux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-16384-veyrmux-tcp"
+    },
+    "results/final-diag-16384-yamux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-16384-yamux-duplex"
+    },
+    "results/final-diag-16384-yamux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-16384-yamux-tcp"
+    },
+    "results/final-diag-32768-veyrmux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-32768-veyrmux-duplex"
+    },
+    "results/final-diag-32768-veyrmux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-32768-veyrmux-tcp"
+    },
+    "results/final-diag-32768-yamux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-32768-yamux-duplex"
+    },
+    "results/final-diag-32768-yamux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-32768-yamux-tcp"
+    },
+    "results/final-diag-65536-veyrmux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-65536-veyrmux-duplex"
+    },
+    "results/final-diag-65536-veyrmux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-65536-veyrmux-tcp"
+    },
+    "results/final-diag-65536-yamux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-65536-yamux-duplex"
+    },
+    "results/final-diag-65536-yamux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-diag-65536-yamux-tcp"
+    },
+    "results/final-mismatch-d131072-c16384-veyrmux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d131072-c16384-veyrmux-duplex"
+    },
+    "results/final-mismatch-d131072-c16384-veyrmux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d131072-c16384-veyrmux-tcp"
+    },
+    "results/final-mismatch-d131072-c16384-yamux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d131072-c16384-yamux-duplex"
+    },
+    "results/final-mismatch-d131072-c16384-yamux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d131072-c16384-yamux-tcp"
+    },
+    "results/final-mismatch-d16384-c131072-veyrmux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d16384-c131072-veyrmux-duplex"
+    },
+    "results/final-mismatch-d16384-c131072-veyrmux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d16384-c131072-veyrmux-tcp"
+    },
+    "results/final-mismatch-d16384-c131072-yamux-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d16384-c131072-yamux-duplex"
+    },
+    "results/final-mismatch-d16384-c131072-yamux-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-mismatch-d16384-c131072-yamux-tcp"
+    },
+    "results/final-native16-duplex-counters.json": {
+      "bundle": "counters.json",
+      "phase_name": "final-native16-duplex-counters"
+    },
+    "results/final-native16-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-native16-duplex"
+    },
+    "results/final-native16-tcp-counters.json": {
+      "bundle": "counters.json",
+      "phase_name": "final-native16-tcp-counters"
+    },
+    "results/final-native16-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-native16-tcp"
+    },
+    "results/final-reader-mixed-duplex.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-reader-mixed-duplex"
+    },
+    "results/final-reader-mixed-tcp.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-reader-mixed-tcp"
+    },
+    "results/final-reader-small-duplex.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-reader-small-duplex"
+    },
+    "results/final-reader-small-tcp.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-reader-small-tcp"
+    },
+    "results/final-size-mixed-duplex.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-size-mixed-duplex"
+    },
+    "results/final-size-mixed-tcp.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-size-mixed-tcp"
+    },
+    "results/final-size-single-duplex.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-size-single-duplex"
+    },
+    "results/final-size-single-tcp.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-size-single-tcp"
+    },
+    "results/final-size-small-duplex.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-size-small-duplex"
+    },
+    "results/final-size-small-tcp.json": {
+      "bundle": "latency.json",
+      "phase_name": "final-size-small-tcp"
+    },
+    "results/final-stock16-duplex-counters.json": {
+      "bundle": "counters.json",
+      "phase_name": "final-stock16-duplex-counters"
+    },
+    "results/final-stock16-duplex.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-stock16-duplex"
+    },
+    "results/final-stock16-tcp-counters.json": {
+      "bundle": "counters.json",
+      "phase_name": "final-stock16-tcp-counters"
+    },
+    "results/final-stock16-tcp.json": {
+      "bundle": "timings.json",
+      "phase_name": "final-stock16-tcp"
+    },
+    "results/legacy-macro-native-duplex.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "legacy-macro-native-duplex"
+    },
+    "results/legacy-macro-native-tcp-counters.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "legacy-macro-native-tcp-counters"
+    },
+    "results/legacy-macro-native-tcp.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "legacy-macro-native-tcp"
+    },
+    "results/lifecycle-bridge-native-duplex-counters.json": {
+      "bundle": "harness-lifecycle.json",
+      "phase_name": "lifecycle-bridge-native-duplex-counters"
+    },
+    "results/lifecycle-bridge-native-duplex.json": {
+      "bundle": "harness-lifecycle.json",
+      "phase_name": "lifecycle-bridge-native-duplex"
+    },
+    "results/lifecycle-bridge-native-tcp-counters.json": {
+      "bundle": "harness-lifecycle.json",
+      "phase_name": "lifecycle-bridge-native-tcp-counters"
+    },
+    "results/lifecycle-bridge-native-tcp.json": {
+      "bundle": "harness-lifecycle.json",
+      "phase_name": "lifecycle-bridge-native-tcp"
+    },
+    "results/lookahead-original-native-duplex.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-native-duplex"
+    },
+    "results/lookahead-original-native-tcp-counters.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-native-tcp-counters"
+    },
+    "results/lookahead-original-native-tcp.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-native-tcp"
+    },
+    "results/lookahead-original-single-duplex.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-single-duplex"
+    },
+    "results/lookahead-original-single-tcp.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-single-tcp"
+    },
+    "results/lookahead-original-small-duplex-precision.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-small-duplex-precision"
+    },
+    "results/lookahead-original-small-duplex.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-small-duplex"
+    },
+    "results/lookahead-original-small-tcp.json": {
+      "bundle": "original-harness.json",
+      "phase_name": "lookahead-original-small-tcp"
+    }
+  },
+  "reference_note": "Recorded results/... paths are original logical phase identifiers; use recorded_phase_lookup to find phases[].name in the bundled JSON. Source directories identify frozen build trees, not shipped source locations. Derived tail summaries are retained in summary.json latency_controls.",
+  "schema_version": 1,
+  "selected_runtime": "bounded next-header lookahead; whole-frame write admission, with capped fragments for oversized DATA; no prefix fill/refill experiment retained"
+}

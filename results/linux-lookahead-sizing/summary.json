@@ -1,0 +1,2736 @@
+{
+  "architecture": "x86_64",
+  "final_16k_macro": {
+    "duplex": {
+      "counter_results": [
+        "results/final-native16-duplex-counters.json",
+        "results/final-stock16-duplex-counters.json"
+      ],
+      "native": {
+        "R": {
+          "max_ms": 332.28008052,
+          "mean_ms": 318.672424905,
+          "min_ms": 305.55400952,
+          "runs": 12,
+          "stdev_ms": 8.469189701058552
+        },
+        "W": {
+          "max_ms": 330.38333272,
+          "mean_ms": 326.089508995,
+          "min_ms": 314.29141272,
+          "runs": 12,
+          "stdev_ms": 4.50436357247712
+        }
+      },
+      "reader_change_percent": -2.274554649997562,
+      "stock": {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-stock16-duplex.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 399.52408010000005,
+          "mean_ms": 397.11130876666675,
+          "min_ms": 394.26643310000003,
+          "runs": 3,
+          "stdev_ms": 2.655324577206411
+        },
+        "workload": {
+          "caller_chunk": 16384,
+          "data_chunk": 16384,
+          "engine": "yamux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "duplex"
+        }
+      }
+    },
+    "tcp": {
+      "counter_results": [
+        "results/final-native16-tcp-counters.json",
+        "results/final-stock16-tcp-counters.json"
+      ],
+      "native": {
+        "R": {
+          "max_ms": 632.76224608,
+          "mean_ms": 620.7861165716668,
+          "min_ms": 605.74593298,
+          "runs": 12,
+          "stdev_ms": 9.32670411682198
+        },
+        "W": {
+          "max_ms": 724.5378455,
+          "mean_ms": 672.6268871116667,
+          "min_ms": 626.0457565,
+          "runs": 12,
+          "stdev_ms": 34.474059646728186
+        }
+      },
+      "reader_change_percent": -7.707210569980328,
+      "stock": {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-stock16-tcp.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 1165.31756242,
+          "mean_ms": 1113.8425257533333,
+          "min_ms": 1076.4288014200001,
+          "runs": 3,
+          "stdev_ms": 46.082462352075375
+        },
+        "workload": {
+          "caller_chunk": 16384,
+          "data_chunk": 16384,
+          "engine": "yamux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "tcp"
+        }
+      }
+    }
+  },
+  "harness_evolution": {
+    "correction": "Uniform task lifecycle/echo-buffer management correction removes the evolved benchmark harness's excess TCP brk/minor-fault/kernel-CPU activity; this is not a multiplexer runtime algorithm improvement",
+    "raw_sampled_profiles": "excluded; CPU attribution samples are not wall-time measurements",
+    "result_prefix": "results/lifecycle-bridge-"
+  },
+  "latency_controls": [
+    {
+      "case": "small",
+      "comparisons": {
+        "R_versus_W": {
+          "uniform": {
+            "p50": {
+              "blocks_exceeding_5_percent": 1,
+              "paired_relative_mean_95_percent_t_ci": [
+                -4.483329950405282,
+                1.3677350710213971
+              ],
+              "ratio_of_means_percent": -1.6163580214821227,
+              "ratio_of_medians_percent": -2.021276595744681
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 2,
+              "paired_relative_mean_95_percent_t_ci": [
+                -4.719727013162276,
+                3.9325263234873047
+              ],
+              "ratio_of_means_percent": -0.6457109291552854,
+              "ratio_of_medians_percent": 1.4817397367732799
+            }
+          }
+        }
+      },
+      "family": "reader",
+      "groups": {
+        "R": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 10.17,
+                "mean": 9.46185,
+                "mean_95_percent_t_ci": [
+                  9.256843984662849,
+                  9.666856015337151
+                ],
+                "median": 9.21,
+                "min": 9.11,
+                "n": 20,
+                "stdev": 0.43803355735425226
+              },
+              "p99": {
+                "max": 38.339,
+                "mean": 34.92805,
+                "mean_95_percent_t_ci": [
+                  34.10066972754578,
+                  35.75543027245422
+                ],
+                "median": 34.928999999999995,
+                "min": 32.6,
+                "n": 20,
+                "stdev": 1.767852145371535
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "tcp"
+          }
+        },
+        "W": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 10.39,
+                "mean": 9.6173,
+                "mean_95_percent_t_ci": [
+                  9.426839102462303,
+                  9.807760897537698
+                ],
+                "median": 9.4,
+                "min": 9.31,
+                "n": 20,
+                "stdev": 0.40695520250035555
+              },
+              "p99": {
+                "max": 40.989,
+                "mean": 35.15505,
+                "mean_95_percent_t_ci": [
+                  34.10037162024105,
+                  36.20972837975896
+                ],
+                "median": 34.419,
+                "min": 32.489,
+                "n": 20,
+                "stdev": 2.2535169116411424
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "tcp"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-reader-small-tcp-tails.json",
+      "transport": "tcp",
+      "unit": "microseconds"
+    },
+    {
+      "case": "mixed",
+      "comparisons": {
+        "R_versus_W": {
+          "bulk": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -13.857566340369523,
+                -9.436717987528315
+              ],
+              "ratio_of_means_percent": -11.654546641844965,
+              "ratio_of_medians_percent": -8.24837081723574
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -16.183497447286967,
+                -1.8456419213581858
+              ],
+              "ratio_of_means_percent": -9.87307252520756,
+              "ratio_of_medians_percent": -9.282575680874782
+            }
+          },
+          "interactive": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -14.55462355145416,
+                -10.54668477604919
+              ],
+              "ratio_of_means_percent": -12.548675591322889,
+              "ratio_of_medians_percent": -9.241809605945427
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -13.768380623873655,
+                -1.1351595661454041
+              ],
+              "ratio_of_means_percent": -8.060736973984184,
+              "ratio_of_medians_percent": -8.004439570313016
+            }
+          }
+        }
+      },
+      "family": "reader",
+      "groups": {
+        "R": {
+          "actual_payload_bytes_range": [
+            537789312,
+            537789312
+          ],
+          "actual_requests_range": [
+            7431,
+            7431
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 535.9250000000001,
+                "mean": 495.1563,
+                "mean_95_percent_t_ci": [
+                  479.29974617207074,
+                  511.01285382792923
+                ],
+                "median": 511.786,
+                "min": 438.56800000000004,
+                "n": 20,
+                "stdev": 33.88048233220946
+              },
+              "p99": {
+                "max": 863.7669999999999,
+                "mean": 689.83655,
+                "mean_95_percent_t_ci": [
+                  653.1417853922192,
+                  726.5313146077808
+                ],
+                "median": 672.012,
+                "min": 573.004,
+                "n": 20,
+                "stdev": 78.40520313996018
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                918400,
+                918400
+              ],
+              "actual_requests_range": [
+                7175,
+                7175
+              ],
+              "p50": {
+                "max": 135.137,
+                "mean": 123.3152,
+                "mean_95_percent_t_ci": [
+                  118.96591910018364,
+                  127.66448089981637
+                ],
+                "median": 127.8615,
+                "min": 108.337,
+                "n": 20,
+                "stdev": 9.293049188563062
+              },
+              "p99": {
+                "max": 257.48299999999995,
+                "mean": 212.0067,
+                "mean_95_percent_t_ci": [
+                  204.21432367281417,
+                  219.79907632718582
+                ],
+                "median": 208.875,
+                "min": 189.13400000000001,
+                "n": 20,
+                "stdev": 16.649864235577347
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        "W": {
+          "actual_payload_bytes_range": [
+            537789312,
+            537789312
+          ],
+          "actual_requests_range": [
+            7431,
+            7431
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 597.374,
+                "mean": 560.4774,
+                "mean_95_percent_t_ci": [
+                  554.5695348199966,
+                  566.3852651800033
+                ],
+                "median": 557.7950000000001,
+                "min": 544.916,
+                "n": 20,
+                "stdev": 12.623254966007872
+              },
+              "p99": {
+                "max": 1074.5710000000001,
+                "mean": 765.4056,
+                "mean_95_percent_t_ci": [
+                  712.7319822117614,
+                  818.0792177882387
+                ],
+                "median": 740.7750000000001,
+                "min": 633.532,
+                "n": 20,
+                "stdev": 112.54700083095109
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                918400,
+                918400
+              ],
+              "actual_requests_range": [
+                7175,
+                7175
+              ],
+              "p50": {
+                "max": 149.66600000000003,
+                "mean": 141.0101,
+                "mean_95_percent_t_ci": [
+                  139.5674626649386,
+                  142.45273733506139
+                ],
+                "median": 140.88150000000002,
+                "min": 136.61599999999999,
+                "n": 20,
+                "stdev": 3.0824635209349633
+              },
+              "p99": {
+                "max": 283.61199999999997,
+                "mean": 230.5943,
+                "mean_95_percent_t_ci": [
+                  218.58871137642652,
+                  242.5998886235735
+                ],
+                "median": 227.049,
+                "min": 201.655,
+                "n": 20,
+                "stdev": 25.65217749472844
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-reader-mixed-tcp-tails.json",
+      "transport": "tcp",
+      "unit": "microseconds"
+    },
+    {
+      "case": "small",
+      "comparisons": {
+        "R_versus_W": {
+          "uniform": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -1.323090729838297,
+                -0.9934471842029531
+              ],
+              "ratio_of_means_percent": -1.1585685408400215,
+              "ratio_of_medians_percent": -1.1235955056179692
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 4,
+              "paired_relative_mean_95_percent_t_ci": [
+                -14.273324636837689,
+                15.596073190144846
+              ],
+              "ratio_of_means_percent": -3.1953594301698196,
+              "ratio_of_medians_percent": 0.33112582781458233
+            }
+          }
+        }
+      },
+      "family": "reader",
+      "groups": {
+        "R": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 2.66,
+                "mean": 2.64045,
+                "mean_95_percent_t_ci": [
+                  2.6368938846686296,
+                  2.6440061153313703
+                ],
+                "median": 2.64,
+                "min": 2.63,
+                "n": 20,
+                "stdev": 0.0075983031346687
+              },
+              "p99": {
+                "max": 10.44,
+                "mean": 6.33325,
+                "mean_95_percent_t_ci": [
+                  5.528241349784349,
+                  7.138258650215651
+                ],
+                "median": 6.0600000000000005,
+                "min": 4.058999999999999,
+                "n": 20,
+                "stdev": 1.720051005210693
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "duplex"
+          }
+        },
+        "W": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 2.69,
+                "mean": 2.6714,
+                "mean_95_percent_t_ci": [
+                  2.6670481414754996,
+                  2.675751858524501
+                ],
+                "median": 2.67,
+                "min": 2.66,
+                "n": 20,
+                "stdev": 0.009298556764075622
+              },
+              "p99": {
+                "max": 14.939,
+                "mean": 6.5423,
+                "mean_95_percent_t_ci": [
+                  5.351083310120238,
+                  7.733516689879762
+                ],
+                "median": 6.04,
+                "min": 3.6799999999999997,
+                "n": 20,
+                "stdev": 2.5452564569368934
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "duplex"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-reader-small-duplex-tails.json",
+      "transport": "duplex",
+      "unit": "microseconds"
+    },
+    {
+      "case": "mixed",
+      "comparisons": {
+        "R_versus_W": {
+          "bulk": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -3.692524633399927,
+                -1.6575217291160718
+              ],
+              "ratio_of_means_percent": -2.686449990678541,
+              "ratio_of_medians_percent": -2.5878252381011824
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 5,
+              "paired_relative_mean_95_percent_t_ci": [
+                -6.5049301328314195,
+                9.73247259927366
+              ],
+              "ratio_of_means_percent": 1.4008896387827985,
+              "ratio_of_medians_percent": 5.768704215203568
+            }
+          },
+          "interactive": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -3.557599722830096,
+                -1.8328810907402178
+              ],
+              "ratio_of_means_percent": -2.70136050902694,
+              "ratio_of_medians_percent": -2.681304517940575
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -6.625385722843826,
+                2.5588250866632682
+              ],
+              "ratio_of_means_percent": -2.259647753794025,
+              "ratio_of_medians_percent": -1.678460266511017
+            }
+          }
+        }
+      },
+      "family": "reader",
+      "groups": {
+        "R": {
+          "actual_payload_bytes_range": [
+            537755776,
+            537756288
+          ],
+          "actual_requests_range": [
+            7169,
+            7173
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 158.846,
+                "mean": 155.81325,
+                "mean_95_percent_t_ci": [
+                  155.00915180201758,
+                  156.61734819798244
+                ],
+                "median": 155.6705,
+                "min": 151.96599999999998,
+                "n": 20,
+                "stdev": 1.7181056543395976
+              },
+              "p99": {
+                "max": 303.541,
+                "mean": 227.8913,
+                "mean_95_percent_t_ci": [
+                  211.06839709658567,
+                  244.71420290341433
+                ],
+                "median": 220.18400000000003,
+                "min": 193.655,
+                "n": 20,
+                "stdev": 35.94526722393367
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                884864,
+                885376
+              ],
+              "actual_requests_range": [
+                6913,
+                6917
+              ],
+              "p50": {
+                "max": 43.278999999999996,
+                "mean": 42.3198,
+                "mean_95_percent_t_ci": [
+                  42.0625051592575,
+                  42.577094840742504
+                ],
+                "median": 42.284,
+                "min": 41.278,
+                "n": 20,
+                "stdev": 0.5497583775480008
+              },
+              "p99": {
+                "max": 94.797,
+                "mean": 82.1666,
+                "mean_95_percent_t_ci": [
+                  79.86519388156836,
+                  84.46800611843165
+                ],
+                "median": 80.8675,
+                "min": 76.488,
+                "n": 20,
+                "stdev": 4.917383069543351
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        "W": {
+          "actual_payload_bytes_range": [
+            537755776,
+            537756544
+          ],
+          "actual_requests_range": [
+            7169,
+            7175
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 169.035,
+                "mean": 160.11464999999998,
+                "mean_95_percent_t_ci": [
+                  158.97842721635573,
+                  161.25087278364424
+                ],
+                "median": 159.80599999999998,
+                "min": 157.61599999999999,
+                "n": 20,
+                "stdev": 2.4277517274218945
+              },
+              "p99": {
+                "max": 286.74199999999996,
+                "mean": 224.7429,
+                "mean_95_percent_t_ci": [
+                  209.82794184957712,
+                  239.65785815042287
+                ],
+                "median": 208.17499999999998,
+                "min": 195.014,
+                "n": 20,
+                "stdev": 31.868587688390445
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                884864,
+                885632
+              ],
+              "actual_requests_range": [
+                6913,
+                6919
+              ],
+              "p50": {
+                "max": 44.978,
+                "mean": 43.494749999999996,
+                "mean_95_percent_t_ci": [
+                  43.243539755234174,
+                  43.74596024476582
+                ],
+                "median": 43.449,
+                "min": 42.888,
+                "n": 20,
+                "stdev": 0.5367575042987779
+              },
+              "p99": {
+                "max": 107.067,
+                "mean": 84.0662,
+                "mean_95_percent_t_ci": [
+                  80.94877951711868,
+                  87.18362048288131
+                ],
+                "median": 82.24799999999999,
+                "min": 78.748,
+                "n": 20,
+                "stdev": 6.660949834275652
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-reader-mixed-duplex-tails.json",
+      "transport": "duplex",
+      "unit": "microseconds"
+    },
+    {
+      "case": "small",
+      "comparisons": {
+        "R128_versus_R16": {
+          "uniform": {
+            "p50": {
+              "blocks_exceeding_5_percent": 2,
+              "paired_relative_mean_95_percent_t_ci": [
+                -0.5215124443674273,
+                5.762385036550285
+              ],
+              "ratio_of_means_percent": 2.5166731542753285,
+              "ratio_of_medians_percent": 0.5714285714285783
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 3,
+              "paired_relative_mean_95_percent_t_ci": [
+                -7.360821305006612,
+                12.33851702950359
+              ],
+              "ratio_of_means_percent": 1.9335443080790604,
+              "ratio_of_medians_percent": 1.8962462628723253
+            }
+          }
+        }
+      },
+      "family": "size",
+      "groups": {
+        "R128": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 10.71,
+                "mean": 9.876199999999999,
+                "mean_95_percent_t_ci": [
+                  9.68924753068439,
+                  10.063152469315607
+                ],
+                "median": 9.68,
+                "min": 9.568999999999999,
+                "n": 20,
+                "stdev": 0.3994587917617907
+              },
+              "p99": {
+                "max": 49.349,
+                "mean": 37.67,
+                "mean_95_percent_t_ci": [
+                  35.79800333418932,
+                  39.541996665810686
+                ],
+                "median": 36.809,
+                "min": 33.899,
+                "n": 20,
+                "stdev": 3.9998697478792984
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "tcp"
+          }
+        },
+        "R16": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 10.180000000000001,
+                "mean": 9.63375,
+                "mean_95_percent_t_ci": [
+                  9.41964188921575,
+                  9.847858110784248
+                ],
+                "median": 9.625,
+                "min": 9.129,
+                "n": 20,
+                "stdev": 0.4574818805730251
+              },
+              "p99": {
+                "max": 46.379,
+                "mean": 36.95545,
+                "mean_95_percent_t_ci": [
+                  35.266229750467154,
+                  38.644670249532844
+                ],
+                "median": 36.124,
+                "min": 32.518,
+                "n": 20,
+                "stdev": 3.6093338716954984
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "tcp"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-size-small-tcp-tails.json",
+      "transport": "tcp",
+      "unit": "microseconds"
+    },
+    {
+      "case": "single",
+      "comparisons": {
+        "R128_versus_R16": {
+          "uniform": {
+            "p50": {
+              "blocks_exceeding_5_percent": 1,
+              "paired_relative_mean_95_percent_t_ci": [
+                -1.9000669817154985,
+                1.7630803918220277
+              ],
+              "ratio_of_means_percent": -0.1109736931676375,
+              "ratio_of_medians_percent": -1.5641530549219573
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 8,
+              "paired_relative_mean_95_percent_t_ci": [
+                7.7777742832413495,
+                35.3428387281819
+              ],
+              "ratio_of_means_percent": 19.649294493369098,
+              "ratio_of_medians_percent": 22.18922866659061
+            }
+          }
+        }
+      },
+      "family": "size",
+      "groups": {
+        "R128": {
+          "actual_payload_bytes_range": [
+            536870912,
+            536870912
+          ],
+          "actual_requests_range": [
+            256,
+            256
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 338.58,
+                "mean": 325.16635,
+                "mean_95_percent_t_ci": [
+                  321.77590332858813,
+                  328.5567966714119
+                ],
+                "median": 321.9305,
+                "min": 316.572,
+                "n": 20,
+                "stdev": 7.24432116811797
+              },
+              "p99": {
+                "max": 718.111,
+                "mean": 557.40275,
+                "mean_95_percent_t_ci": [
+                  520.1055041570839,
+                  594.699995842916
+                ],
+                "median": 546.2555,
+                "min": 437.868,
+                "n": 20,
+                "stdev": 79.69251657918505
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "tcp"
+          }
+        },
+        "R16": {
+          "actual_payload_bytes_range": [
+            536870912,
+            536870912
+          ],
+          "actual_requests_range": [
+            256,
+            256
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 343.23999999999995,
+                "mean": 325.5276,
+                "mean_95_percent_t_ci": [
+                  321.0398659397479,
+                  330.0153340602521
+                ],
+                "median": 327.04600000000005,
+                "min": 306.041,
+                "n": 20,
+                "stdev": 9.58888016841437
+              },
+              "p99": {
+                "max": 703.261,
+                "mean": 465.86379999999997,
+                "mean_95_percent_t_ci": [
+                  423.4221135818163,
+                  508.30548641818365
+                ],
+                "median": 447.057,
+                "min": 360.24,
+                "n": 20,
+                "stdev": 90.68457260288776
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "tcp"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-size-single-tcp-tails.json",
+      "transport": "tcp",
+      "unit": "microseconds"
+    },
+    {
+      "case": "mixed",
+      "comparisons": {
+        "R128_versus_R16": {
+          "bulk": {
+            "p50": {
+              "blocks_exceeding_5_percent": 7,
+              "paired_relative_mean_95_percent_t_ci": [
+                -3.364425554274572,
+                34.14480648077544
+              ],
+              "ratio_of_means_percent": 15.03615065790125,
+              "ratio_of_medians_percent": 11.725901635480307
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 5,
+              "paired_relative_mean_95_percent_t_ci": [
+                -3.1100131237980833,
+                27.71297451860882
+              ],
+              "ratio_of_means_percent": 11.70873155341894,
+              "ratio_of_medians_percent": 16.882504752620918
+            }
+          },
+          "interactive": {
+            "p50": {
+              "blocks_exceeding_5_percent": 7,
+              "paired_relative_mean_95_percent_t_ci": [
+                -5.219060147669893,
+                33.32557582157832
+              ],
+              "ratio_of_means_percent": 13.677799143748647,
+              "ratio_of_medians_percent": 9.101126675621597
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 4,
+              "paired_relative_mean_95_percent_t_ci": [
+                -7.138842750227052,
+                14.41248202821411
+              ],
+              "ratio_of_means_percent": 3.2946879566392306,
+              "ratio_of_medians_percent": 9.447493792543282
+            }
+          }
+        }
+      },
+      "family": "size",
+      "groups": {
+        "R128": {
+          "actual_payload_bytes_range": [
+            537788544,
+            537789184
+          ],
+          "actual_requests_range": [
+            7425,
+            7430
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 734.9,
+                "mean": 563.54755,
+                "mean_95_percent_t_ci": [
+                  494.4020203146548,
+                  632.6930796853452
+                ],
+                "median": 568.815,
+                "min": 413.178,
+                "n": 20,
+                "stdev": 147.7423103580851
+              },
+              "p99": {
+                "max": 1161.238,
+                "mean": 772.5114,
+                "mean_95_percent_t_ci": [
+                  689.9515577491674,
+                  855.0712422508326
+                ],
+                "median": 782.3734999999999,
+                "min": 523.286,
+                "n": 20,
+                "stdev": 176.40448908907888
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                917632,
+                918272
+              ],
+              "actual_requests_range": [
+                7169,
+                7174
+              ],
+              "p50": {
+                "max": 182.095,
+                "mean": 137.86025,
+                "mean_95_percent_t_ci": [
+                  120.0295179069424,
+                  155.6909820930576
+                ],
+                "median": 139.2965,
+                "min": 97.847,
+                "n": 20,
+                "stdev": 38.098682109925505
+              },
+              "p99": {
+                "max": 300.872,
+                "mean": 219.77360000000002,
+                "mean_95_percent_t_ci": [
+                  200.5680703658976,
+                  238.97912963410243
+                ],
+                "median": 225.0235,
+                "min": 166.505,
+                "n": 20,
+                "stdev": 41.03619326809984
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        },
+        "R16": {
+          "actual_payload_bytes_range": [
+            537789312,
+            537789312
+          ],
+          "actual_requests_range": [
+            7431,
+            7431
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 537.2760000000001,
+                "mean": 489.88735,
+                "mean_95_percent_t_ci": [
+                  474.18076102487015,
+                  505.5939389751299
+                ],
+                "median": 509.1165,
+                "min": 432.678,
+                "n": 20,
+                "stdev": 33.56005447626687
+              },
+              "p99": {
+                "max": 921.315,
+                "mean": 691.54075,
+                "mean_95_percent_t_ci": [
+                  645.5811091880108,
+                  737.5003908119892
+                ],
+                "median": 669.3675000000001,
+                "min": 532.265,
+                "n": 20,
+                "stdev": 98.2013377826526
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                918400,
+                918400
+              ],
+              "actual_requests_range": [
+                7175,
+                7175
+              ],
+              "p50": {
+                "max": 136.447,
+                "mean": 121.2728,
+                "mean_95_percent_t_ci": [
+                  115.63031326688125,
+                  126.91528673311876
+                ],
+                "median": 127.6765,
+                "min": 94.75800000000001,
+                "n": 20,
+                "stdev": 12.056224457450227
+              },
+              "p99": {
+                "max": 280.503,
+                "mean": 212.7637,
+                "mean_95_percent_t_ci": [
+                  201.14586477062272,
+                  224.38153522937728
+                ],
+                "median": 205.5995,
+                "min": 171.915,
+                "n": 20,
+                "stdev": 24.82367010504713
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "tcp"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-size-mixed-tcp-tails.json",
+      "transport": "tcp",
+      "unit": "microseconds"
+    },
+    {
+      "case": "small",
+      "comparisons": {
+        "R128_versus_R16": {
+          "uniform": {
+            "p50": {
+              "blocks_exceeding_5_percent": 10,
+              "paired_relative_mean_95_percent_t_ci": [
+                14.236515539793334,
+                16.38071613605128
+              ],
+              "ratio_of_means_percent": 15.306777421181783,
+              "ratio_of_medians_percent": 14.734848484848495
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 8,
+              "paired_relative_mean_95_percent_t_ci": [
+                6.882262204691209,
+                48.74881313587233
+              ],
+              "ratio_of_means_percent": 24.361053501535967,
+              "ratio_of_medians_percent": 21.241050119331728
+            }
+          }
+        }
+      },
+      "family": "size",
+      "groups": {
+        "R128": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 3.1599999999999997,
+                "mean": 3.0539,
+                "mean_95_percent_t_ci": [
+                  3.0293740802363285,
+                  3.0784259197636716
+                ],
+                "median": 3.0290000000000004,
+                "min": 3.01,
+                "n": 20,
+                "stdev": 0.052404198305097655
+              },
+              "p99": {
+                "max": 10.74,
+                "mean": 7.97515,
+                "mean_95_percent_t_ci": [
+                  7.271773141930458,
+                  8.678526858069542
+                ],
+                "median": 7.619999999999999,
+                "min": 5.9,
+                "n": 20,
+                "stdev": 1.5028957408598695
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "duplex"
+          }
+        },
+        "R16": {
+          "actual_payload_bytes_range": [
+            524288,
+            524288
+          ],
+          "actual_requests_range": [
+            4096,
+            4096
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                524288,
+                524288
+              ],
+              "actual_requests_range": [
+                4096,
+                4096
+              ],
+              "p50": {
+                "max": 2.7,
+                "mean": 2.6485000000000003,
+                "mean_95_percent_t_ci": [
+                  2.63784114054957,
+                  2.6591588594504305
+                ],
+                "median": 2.64,
+                "min": 2.62,
+                "n": 20,
+                "stdev": 0.022774639635487454
+              },
+              "p99": {
+                "max": 9.819999999999999,
+                "mean": 6.4129,
+                "mean_95_percent_t_ci": [
+                  5.5690495135545985,
+                  7.256750486445401
+                ],
+                "median": 6.285,
+                "min": 4.0600000000000005,
+                "n": 20,
+                "stdev": 1.8030438270062275
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 64,
+            "rounds": 4096,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "duplex"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-size-small-duplex-tails.json",
+      "transport": "duplex",
+      "unit": "microseconds"
+    },
+    {
+      "case": "single",
+      "comparisons": {
+        "R128_versus_R16": {
+          "uniform": {
+            "p50": {
+              "blocks_exceeding_5_percent": 10,
+              "paired_relative_mean_95_percent_t_ci": [
+                29.293745730095175,
+                31.850556019267515
+              ],
+              "ratio_of_means_percent": 30.56328675644904,
+              "ratio_of_medians_percent": 30.537082516993653
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 9,
+              "paired_relative_mean_95_percent_t_ci": [
+                17.54343690853532,
+                40.053889544764424
+              ],
+              "ratio_of_means_percent": 27.919996625785082,
+              "ratio_of_medians_percent": 25.068854643044713
+            }
+          }
+        }
+      },
+      "family": "size",
+      "groups": {
+        "R128": {
+          "actual_payload_bytes_range": [
+            536870912,
+            536870912
+          ],
+          "actual_requests_range": [
+            256,
+            256
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 146.476,
+                "mean": 142.2566,
+                "mean_95_percent_t_ci": [
+                  141.3384387325081,
+                  143.17476126749187
+                ],
+                "median": 141.916,
+                "min": 137.716,
+                "n": 20,
+                "stdev": 1.9618226595103896
+              },
+              "p99": {
+                "max": 252.693,
+                "mean": 207.7525,
+                "mean_95_percent_t_ci": [
+                  195.33518614791,
+                  220.16981385209
+                ],
+                "median": 195.265,
+                "min": 176.155,
+                "n": 20,
+                "stdev": 26.531905175903933
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "duplex"
+          }
+        },
+        "R16": {
+          "actual_payload_bytes_range": [
+            536870912,
+            536870912
+          ],
+          "actual_requests_range": [
+            256,
+            256
+          ],
+          "classes": {
+            "uniform": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 111.097,
+                "mean": 108.95605,
+                "mean_95_percent_t_ci": [
+                  108.45517557119724,
+                  109.45692442880276
+                ],
+                "median": 108.71700000000001,
+                "min": 107.457,
+                "n": 20,
+                "stdev": 1.070211561721376
+              },
+              "p99": {
+                "max": 221.254,
+                "mean": 162.40815,
+                "mean_95_percent_t_ci": [
+                  150.19214238842818,
+                  174.62415761157183
+                ],
+                "median": 156.126,
+                "min": 134.20700000000002,
+                "n": 20,
+                "stdev": 26.101776876952464
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "uniform",
+            "streams": 1,
+            "transport": "duplex"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-size-single-duplex-tails.json",
+      "transport": "duplex",
+      "unit": "microseconds"
+    },
+    {
+      "case": "mixed",
+      "comparisons": {
+        "R128_versus_R16": {
+          "bulk": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -6.553032375356514,
+                -2.9903598484432803
+              ],
+              "ratio_of_means_percent": -4.795597584537981,
+              "ratio_of_medians_percent": -4.301811136707567
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 3,
+              "paired_relative_mean_95_percent_t_ci": [
+                -17.31074300992303,
+                18.99949435881468
+              ],
+              "ratio_of_means_percent": -1.6401340103514572,
+              "ratio_of_medians_percent": -4.322853550826256
+            }
+          },
+          "interactive": {
+            "p50": {
+              "blocks_exceeding_5_percent": 0,
+              "paired_relative_mean_95_percent_t_ci": [
+                -11.29997077740462,
+                -8.26894978955739
+              ],
+              "ratio_of_means_percent": -9.793592204340761,
+              "ratio_of_medians_percent": -9.668550843139357
+            },
+            "p99": {
+              "blocks_exceeding_5_percent": 5,
+              "paired_relative_mean_95_percent_t_ci": [
+                -0.5921618307892755,
+                15.741189558615712
+              ],
+              "ratio_of_means_percent": 7.008467611001357,
+              "ratio_of_medians_percent": 6.712772854981641
+            }
+          }
+        }
+      },
+      "family": "size",
+      "groups": {
+        "R128": {
+          "actual_payload_bytes_range": [
+            537723008,
+            537723776
+          ],
+          "actual_requests_range": [
+            6913,
+            6919
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 158.085,
+                "mean": 149.3024,
+                "mean_95_percent_t_ci": [
+                  147.52952180519574,
+                  151.07527819480427
+                ],
+                "median": 148.926,
+                "min": 142.386,
+                "n": 20,
+                "stdev": 3.7880846625341316
+              },
+              "p99": {
+                "max": 343.351,
+                "mean": 230.61405000000002,
+                "mean_95_percent_t_ci": [
+                  210.05995703097256,
+                  251.16814296902749
+                ],
+                "median": 210.80450000000002,
+                "min": 189.79399999999998,
+                "n": 20,
+                "stdev": 43.91765015580746
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                852096,
+                852864
+              ],
+              "actual_requests_range": [
+                6657,
+                6663
+              ],
+              "p50": {
+                "max": 40.649,
+                "mean": 38.1855,
+                "mean_95_percent_t_ci": [
+                  37.74758550530205,
+                  38.62341449469795
+                ],
+                "median": 38.114,
+                "min": 36.189,
+                "n": 20,
+                "stdev": 0.9356859290887825
+              },
+              "p99": {
+                "max": 113.53699999999999,
+                "mean": 89.96555000000001,
+                "mean_95_percent_t_ci": [
+                  85.88270259935538,
+                  94.04839740064463
+                ],
+                "median": 86.408,
+                "min": 80.97699999999999,
+                "n": 20,
+                "stdev": 8.723764364170947
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 131072,
+            "data_chunk": 131072,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        },
+        "R16": {
+          "actual_payload_bytes_range": [
+            537755776,
+            537756544
+          ],
+          "actual_requests_range": [
+            7169,
+            7175
+          ],
+          "classes": {
+            "bulk": {
+              "actual_payload_bytes_range": [
+                536870912,
+                536870912
+              ],
+              "actual_requests_range": [
+                256,
+                256
+              ],
+              "p50": {
+                "max": 166.734,
+                "mean": 156.823,
+                "mean_95_percent_t_ci": [
+                  155.05850776769967,
+                  158.58749223230035
+                ],
+                "median": 155.6205,
+                "min": 152.90599999999998,
+                "n": 20,
+                "stdev": 3.770166490809265
+              },
+              "p99": {
+                "max": 325.831,
+                "mean": 234.4595,
+                "mean_95_percent_t_ci": [
+                  213.93807205167565,
+                  254.98092794832434
+                ],
+                "median": 220.329,
+                "min": 188.595,
+                "n": 20,
+                "stdev": 43.84785525151595
+              }
+            },
+            "interactive": {
+              "actual_payload_bytes_range": [
+                884864,
+                885632
+              ],
+              "actual_requests_range": [
+                6913,
+                6919
+              ],
+              "p50": {
+                "max": 43.979,
+                "mean": 42.33125,
+                "mean_95_percent_t_ci": [
+                  42.0066876389377,
+                  42.655812361062296
+                ],
+                "median": 42.1935,
+                "min": 41.429,
+                "n": 20,
+                "stdev": 0.6934879709046667
+              },
+              "p99": {
+                "max": 107.328,
+                "mean": 84.0733,
+                "mean_95_percent_t_ci": [
+                  80.00949670931453,
+                  88.13710329068547
+                ],
+                "median": 80.9725,
+                "min": 75.178,
+                "n": 20,
+                "stdev": 8.68307307412107
+              }
+            }
+          },
+          "workload": {
+            "caller_chunk": 16384,
+            "data_chunk": 16384,
+            "engine": "veyrmux",
+            "payload": 1048576,
+            "rounds": 256,
+            "scenario": "mixed",
+            "streams": 8,
+            "transport": "duplex"
+          }
+        }
+      },
+      "processes_per_condition": 20,
+      "result": "results/final-size-mixed-duplex-tails.json",
+      "transport": "duplex",
+      "unit": "microseconds"
+    }
+  ],
+  "legacy_harness_prefix_experiment": {
+    "duplex": {
+      "change_vs_Q_percent": {
+        "L0": -5.037931409234941,
+        "LP0": -3.9851813004872394,
+        "P0": -2.6523433872484237
+      },
+      "groups": {
+        "L0": {
+          "max_ms": 321.94499532000003,
+          "mean_ms": 312.84655642,
+          "min_ms": 299.70879966,
+          "runs": 12,
+          "stdev_ms": 5.683440688682227
+        },
+        "LP0": {
+          "max_ms": 327.35722842,
+          "mean_ms": 316.314775375,
+          "min_ms": 300.81404896000004,
+          "runs": 12,
+          "stdev_ms": 9.244985830034082
+        },
+        "P0": {
+          "max_ms": 333.05549434000005,
+          "mean_ms": 320.70572596833335,
+          "min_ms": 311.26133934,
+          "runs": 12,
+          "stdev_ms": 6.134184636643655
+        },
+        "Q": {
+          "max_ms": 341.76417856,
+          "mean_ms": 329.44370427333337,
+          "min_ms": 321.20958552,
+          "runs": 12,
+          "stdev_ms": 6.823665256893463
+        }
+      }
+    },
+    "tcp": {
+      "change_vs_Q_percent": {
+        "L0": -8.307272287688761,
+        "LP0": 4.492035057868549,
+        "P0": 10.728870681574199
+      },
+      "groups": {
+        "L0": {
+          "max_ms": 668.94446094,
+          "mean_ms": 621.293833185,
+          "min_ms": 575.59389874,
+          "runs": 12,
+          "stdev_ms": 36.88841947650795
+        },
+        "LP0": {
+          "max_ms": 749.6693059400001,
+          "mean_ms": 708.0196937983334,
+          "min_ms": 677.1153873,
+          "runs": 12,
+          "stdev_ms": 28.564557247622762
+        },
+        "P0": {
+          "max_ms": 851.0976939,
+          "mean_ms": 750.2793975750001,
+          "min_ms": 685.3019486400001,
+          "runs": 12,
+          "stdev_ms": 48.32551017922247
+        },
+        "Q": {
+          "max_ms": 753.9217047200001,
+          "mean_ms": 677.5824524866667,
+          "min_ms": 656.8476472,
+          "runs": 12,
+          "stdev_ms": 25.885029208375823
+        }
+      }
+    }
+  },
+  "macro_workload": {
+    "payload_bytes": 4294967296,
+    "payload_bytes_per_stream_per_direction": 1048576,
+    "receive_window_bytes": 262144,
+    "requests": 2048,
+    "rounds": 256,
+    "stream_cap": 64,
+    "streams": 8
+  },
+  "matched_diagonal": [
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-16384-veyrmux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 628.27472702,
+        "mean_ms": 616.8870006866667,
+        "min_ms": 609.6853240199999,
+        "runs": 3,
+        "stdev_ms": 9.97665950270692
+      },
+      "workload": {
+        "caller_chunk": 16384,
+        "data_chunk": 16384,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-16384-yamux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 1273.2060914,
+        "mean_ms": 1158.0950680666667,
+        "min_ms": 1090.3605894,
+        "runs": 3,
+        "stdev_ms": 100.20739562937716
+      },
+      "workload": {
+        "caller_chunk": 16384,
+        "data_chunk": 16384,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-32768-veyrmux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 686.7314741,
+        "mean_ms": 666.4707477666667,
+        "min_ms": 646.6619291,
+        "runs": 3,
+        "stdev_ms": 20.038594624652475
+      },
+      "workload": {
+        "caller_chunk": 32768,
+        "data_chunk": 32768,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-32768-yamux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 949.4402492400002,
+        "mean_ms": 930.7222379066668,
+        "min_ms": 913.1310622400001,
+        "runs": 3,
+        "stdev_ms": 18.180802625709287
+      },
+      "workload": {
+        "caller_chunk": 32768,
+        "data_chunk": 32768,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-65536-veyrmux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 708.7830611600001,
+        "mean_ms": 702.2945331600001,
+        "min_ms": 692.2454161600001,
+        "runs": 3,
+        "stdev_ms": 8.825064932151884
+      },
+      "workload": {
+        "caller_chunk": 65536,
+        "data_chunk": 65536,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-65536-yamux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 1137.65330568,
+        "mean_ms": 964.7941836800001,
+        "min_ms": 801.1167436800001,
+        "runs": 3,
+        "stdev_ms": 168.45605318289037
+      },
+      "workload": {
+        "caller_chunk": 65536,
+        "data_chunk": 65536,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-131072-veyrmux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 836.6073407000001,
+        "mean_ms": 746.8007983666668,
+        "min_ms": 698.2149727000001,
+        "runs": 3,
+        "stdev_ms": 77.86188086635889
+      },
+      "workload": {
+        "caller_chunk": 131072,
+        "data_chunk": 131072,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-131072-yamux-tcp.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 865.26834254,
+        "mean_ms": 736.8838888733334,
+        "min_ms": 672.03698554,
+        "runs": 3,
+        "stdev_ms": 111.18612574771196
+      },
+      "workload": {
+        "caller_chunk": 131072,
+        "data_chunk": 131072,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "tcp"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-16384-veyrmux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 318.61701908000003,
+        "mean_ms": 314.43937308000005,
+        "min_ms": 307.73285608000003,
+        "runs": 3,
+        "stdev_ms": 5.866228980667482
+      },
+      "workload": {
+        "caller_chunk": 16384,
+        "data_chunk": 16384,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-16384-yamux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 405.3859602400001,
+        "mean_ms": 395.5149969066667,
+        "min_ms": 387.21855724000005,
+        "runs": 3,
+        "stdev_ms": 9.185476390681792
+      },
+      "workload": {
+        "caller_chunk": 16384,
+        "data_chunk": 16384,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-32768-veyrmux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 331.0728512,
+        "mean_ms": 326.9198905333334,
+        "min_ms": 323.9998122,
+        "runs": 3,
+        "stdev_ms": 3.6941804652404766
+      },
+      "workload": {
+        "caller_chunk": 32768,
+        "data_chunk": 32768,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-32768-yamux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 404.68285212000006,
+        "mean_ms": 400.7956774533334,
+        "min_ms": 397.32030212,
+        "runs": 3,
+        "stdev_ms": 3.6985091109561186
+      },
+      "workload": {
+        "caller_chunk": 32768,
+        "data_chunk": 32768,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-65536-veyrmux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 339.78510766,
+        "mean_ms": 336.0397169933333,
+        "min_ms": 331.71172866,
+        "runs": 3,
+        "stdev_ms": 4.068098714425979
+      },
+      "workload": {
+        "caller_chunk": 65536,
+        "data_chunk": 65536,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-65536-yamux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 406.10036729999996,
+        "mean_ms": 398.64613363333336,
+        "min_ms": 394.8526733,
+        "runs": 3,
+        "stdev_ms": 6.455896616887717
+      },
+      "workload": {
+        "caller_chunk": 65536,
+        "data_chunk": 65536,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-131072-veyrmux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 349.301769,
+        "mean_ms": 345.30190866666663,
+        "min_ms": 339.527787,
+        "runs": 3,
+        "stdev_ms": 5.122858917958065
+      },
+      "workload": {
+        "caller_chunk": 131072,
+        "data_chunk": 131072,
+        "engine": "veyrmux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    },
+    {
+      "actual_payload_bytes": 4294967296,
+      "actual_requests": 2048,
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "result": "results/final-diag-131072-yamux-duplex.json",
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+      "timing": {
+        "max_ms": 362.01375418000003,
+        "mean_ms": 354.2535025133334,
+        "min_ms": 349.43273718,
+        "runs": 3,
+        "stdev_ms": 6.786083709803653
+      },
+      "workload": {
+        "caller_chunk": 131072,
+        "data_chunk": 131072,
+        "engine": "yamux",
+        "payload": 1048576,
+        "rounds": 256,
+        "scenario": "uniform",
+        "streams": 8,
+        "transport": "duplex"
+      }
+    }
+  ],
+  "measurement_notes": [
+    "Hyperfine warmup1/runs3 per block; W/R macro uses two interleaved ABBA blocks, giving12 measured process runs per variant per transport",
+    "Sizing cells use3 measured process runs; noisy TCP cells retain standard deviations and direct observations in original artifacts",
+    "All recorded macro cells validate exactly4GiB request-plus-echo payload and2048 exchanges",
+    "Direct latency guardrails use20 processes per condition across10 paired blocks; quantiles are per-process nearest-rank exchange quantiles, not pooled service latency",
+    "Mixed workloads are closed-loop fixed concurrency (1bulk+7small), not fixed arrival rate; actual request/byte counts are retained separately by class",
+    "Hyperfine includes process startup/setup/warmup; CLI elapsed excludes setup and warmup; perf counter executions are separate and include timeout wrapper/startup/setup/warmup",
+    "No strict p99 noninferiority bound is established from noisy intervals; report observed stable harm and uncertainty under the predeclared5percent budget",
+    "No allocator environment, CPU affinity or sysctl changes were made"
+  ],
+  "measurement_recommendations": {
+    "bounded_reader": "supported by replicated bulk improvements and recvfrom reduction; final small/mixed interactive controls show no stable greater-than5percent p99 harm, with disclosed uncertainty",
+    "caller_chunk_default_bytes": 16384,
+    "data_chunk_default_bytes": 16384,
+    "full_prefix_and_refill": "reject: legacy-harness TCP slower despite fewer writes; combined slower than lookahead alone",
+    "larger_defaults": "reject: all larger native matched diagonals are slower, and128KiB has stable greater-than5percent p99 harm in single TCP, small duplex and single duplex controls"
+  },
+  "mismatch_controls": {
+    "cells": [
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d16384-c131072-veyrmux-tcp.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 705.28967062,
+          "mean_ms": 676.4937102866667,
+          "min_ms": 641.25985962,
+          "runs": 3,
+          "stdev_ms": 32.49675365527991
+        },
+        "workload": {
+          "caller_chunk": 131072,
+          "data_chunk": 16384,
+          "engine": "veyrmux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "tcp"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d16384-c131072-yamux-tcp.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 1353.4339609600001,
+          "mean_ms": 1305.1935626266666,
+          "min_ms": 1233.25299496,
+          "runs": 3,
+          "stdev_ms": 63.499131230236564
+        },
+        "workload": {
+          "caller_chunk": 131072,
+          "data_chunk": 16384,
+          "engine": "yamux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "tcp"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d131072-c16384-veyrmux-tcp.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 652.18743774,
+          "mean_ms": 635.5828444066667,
+          "min_ms": 612.03264474,
+          "runs": 3,
+          "stdev_ms": 20.959077644816364
+        },
+        "workload": {
+          "caller_chunk": 16384,
+          "data_chunk": 131072,
+          "engine": "veyrmux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "tcp"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d131072-c16384-yamux-tcp.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 1298.47591598,
+          "mean_ms": 1278.3269269800003,
+          "min_ms": 1252.41427498,
+          "runs": 3,
+          "stdev_ms": 23.565516147252104
+        },
+        "workload": {
+          "caller_chunk": 16384,
+          "data_chunk": 131072,
+          "engine": "yamux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "tcp"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d16384-c131072-veyrmux-duplex.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 379.35456206000003,
+          "mean_ms": 377.19186772666666,
+          "min_ms": 373.74658606,
+          "runs": 3,
+          "stdev_ms": 3.0159776864002557
+        },
+        "workload": {
+          "caller_chunk": 131072,
+          "data_chunk": 16384,
+          "engine": "veyrmux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "duplex"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d16384-c131072-yamux-duplex.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 444.44369956,
+          "mean_ms": 443.05664056,
+          "min_ms": 441.27244556,
+          "runs": 3,
+          "stdev_ms": 1.622498300461674
+        },
+        "workload": {
+          "caller_chunk": 131072,
+          "data_chunk": 16384,
+          "engine": "yamux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "duplex"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d131072-c16384-veyrmux-duplex.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 319.83586632,
+          "mean_ms": 313.69611098666667,
+          "min_ms": 307.42617531999997,
+          "runs": 3,
+          "stdev_ms": 6.2058696302984275
+        },
+        "workload": {
+          "caller_chunk": 16384,
+          "data_chunk": 131072,
+          "engine": "veyrmux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "duplex"
+        }
+      },
+      {
+        "actual_payload_bytes": 4294967296,
+        "actual_requests": 2048,
+        "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+        "result": "results/final-mismatch-d131072-c16384-yamux-duplex.json",
+        "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1",
+        "timing": {
+          "max_ms": 396.9032293,
+          "mean_ms": 395.3267259666667,
+          "min_ms": 392.40076230000005,
+          "runs": 3,
+          "stdev_ms": 2.536500476040213
+        },
+        "workload": {
+          "caller_chunk": 16384,
+          "data_chunk": 131072,
+          "engine": "yamux",
+          "payload": 1048576,
+          "rounds": 256,
+          "scenario": "uniform",
+          "streams": 8,
+          "transport": "duplex"
+        }
+      }
+    ],
+    "larger_candidate_bytes": 131072,
+    "reason": "16KiB is the native bulk winner on both transports; 128KiB is the best larger stock-engine diagonal candidate, selected for caller-versus-DATA attribution and adverse-tail controls, not as a native winner"
+  },
+  "previous_capture_comparison": {
+    "duplex": {
+      "fresh_control_vs_previous_native_percent": 1.247639952972146,
+      "fresh_stock_vs_previous_stock_percent": -0.7814630229508346
+    },
+    "interpretation": "The previous capture used an inline fixed-size echo scratch and different harness lifetimes. The new capture uses dynamically sized buffers and the corrected uniform lifecycle. These cross-capture changes are not isolated runtime gains; use the fresh same-harness W/R comparison for the reader effect. No speedup ratios are chained.",
+    "tcp": {
+      "fresh_control_vs_previous_native_percent": -3.2121280846842626,
+      "fresh_stock_vs_previous_stock_percent": -11.989188872201318
+    }
+  },
+  "runtime": "tokio-current-thread; both endpoints",
+  "status": "complete_requested_final_measurement_matrix",
+  "tcp_receive_syscalls": {
+    "after_mean": 308242.0,
+    "before_mean": 551142.5,
+    "change_percent": -44.0721773407059,
+    "counter_runs_separate_from_timings": true,
+    "executions_per_variant": 2
+  },
+  "variants": {
+    "R": {
+      "architecture": "x86_64",
+      "baseline_revision": "413c794241db2d2609289b319fb37972aa7be32b",
+      "binary": "bin/R-04b9a6e4eb73a763",
+      "binary_sha256": "dfb95e79a30e397648abc7825836e18649e1834bcb4382de05998040506213f0",
+      "build": {
+        "CARGO_ENCODED_RUSTFLAGS": "",
+        "CARGO_INCREMENTAL": "0",
+        "RUSTFLAGS": "",
+        "codegen_units": 1,
+        "command": "cargo build --locked --release --example bench",
+        "fresh_root_compile_confirmed": true,
+        "lto": "thin",
+        "profile": "release"
+      },
+      "cli": "explicit",
+      "declared_distinct_from": [
+        "W"
+      ],
+      "label": "R",
+      "os": "Linux",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)\nbinary: rustc\ncommit-hash: 0ef1bc386059596dada8fb65b50425aab2ea637a\ncommit-date: 2026-11-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0\nLLVM version: 23.1.5",
+      "source_directory": "sources/R",
+      "source_file_sha256": {
+        ".github/workflows/check.yml": "1bdc51d5a8cdbfd460fd103688fd7d69d4f13815280d42b4a784077805efb547",
+        ".gitignore": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "LICENSE": "17356f9b12372fdc904c160aa0a01ce03d49f70668c1a1674faffd167ba58168",
+        "README.md": "36be2dfb7b20ff184bf9b9573308950300c3b31e83ac482388d6b6c52c1edcde",
+        "benches/transport.rs": "b0c81152ed4a21ae3197994ab5961d38fa1e07266456f9fce99a97e10ca96049",
+        "examples/bench.rs": "8824598c55e0c3c6a6a3c8f132d9c8df8287269783e1cd54366ddb8cdaedd28d",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "c52b65a377173b9717e605f104e38abee55b7ca7ec26a418c933953185a13336",
+        "scripts/bench.sh": "1c75743a9c499345612c2559d8b8766fc5ba614e66448f3e9e7dd1c1ee497ccd",
+        "scripts/preflight.sh": "e544c4c058d88be15850a98ee4807b9b2fababfceb11f694a18cf0072d5ecbd2",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "b75ad897f598e6408d36b77634b7bcf049d075ddf5567cabd8507054d971906a",
+        "src/session/lookahead_tests.rs": "830895a6a026a6a3b7e813ae27c0a46e680e2e9b3cc9453f8426d2f51076a7ed",
+        "src/session/receive_tests.rs": "d866d501e3d62dfc48fdd22e6df5c43400673ae2af5fb3b8b0e14b98c42cf852",
+        "src/stream.rs": "5471bf68d7e37a2e20ef24ce5441163a797ac7e886d5d4d5109a4f22d764a68e",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "07f6910da75deb5c1324992d6269100c39e2c5ce56be141f2354abed3dda08b7",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/sizing.rs": "7ff50accdd78599e5a1b3bce3637391cd7755b4b9dfcb110abd2b932f5299ecf",
+        "tests/support/mod.rs": "a667fa3bcdc4c0b889fc5cbc0f2e80e6f2bfbbeab6deed874f95ada45a955691",
+        "tests/vectored.rs": "77df4eb203681541235e5ab2fff860e5de0847b9630e0ef2c20c325d6c3fa61d",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "source_sha256": "04b9a6e4eb73a763054c0f07a336bb44fb29f67571a3b2ca9095a2532d6be6b1"
+    },
+    "W": {
+      "architecture": "x86_64",
+      "baseline_revision": "413c794241db2d2609289b319fb37972aa7be32b",
+      "binary": "bin/W-220c748bb4a6006f",
+      "binary_sha256": "284d44fa56870eadc143675ab44be253552fc5e1c0605350118f7f73e4abd8ef",
+      "build": {
+        "CARGO_ENCODED_RUSTFLAGS": "",
+        "CARGO_INCREMENTAL": "0",
+        "RUSTFLAGS": "",
+        "codegen_units": 1,
+        "command": "cargo build --locked --release --example bench",
+        "fresh_root_compile_confirmed": true,
+        "lto": "thin",
+        "profile": "release"
+      },
+      "cli": "explicit",
+      "declared_distinct_from": [
+        "U"
+      ],
+      "label": "W",
+      "os": "Linux",
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)\nbinary: rustc\ncommit-hash: 0ef1bc386059596dada8fb65b50425aab2ea637a\ncommit-date: 2026-11-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0\nLLVM version: 23.1.5",
+      "source_directory": "sources/W",
+      "source_file_sha256": {
+        ".github/workflows/check.yml": "1bdc51d5a8cdbfd460fd103688fd7d69d4f13815280d42b4a784077805efb547",
+        ".gitignore": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+        "Cargo.lock": "0371274d840616ebdf19183bcb692a201207e51eb81374a1b9eafd04a080c556",
+        "Cargo.toml": "86838e6ec89b2cc387ea5a260ae3fd72dfb3c660028243b9ace701269da3c6bf",
+        "LICENSE": "17356f9b12372fdc904c160aa0a01ce03d49f70668c1a1674faffd167ba58168",
+        "README.md": "335d3c059d30ac436dc4382144bde15fc543c453f44e8a58e269b20b77351470",
+        "benches/transport.rs": "b0c81152ed4a21ae3197994ab5961d38fa1e07266456f9fce99a97e10ca96049",
+        "examples/bench.rs": "8824598c55e0c3c6a6a3c8f132d9c8df8287269783e1cd54366ddb8cdaedd28d",
+        "examples/simd_probe.rs": "6149faa2190b88e365d23d165b5fd8e3227f6d278aebc3eb6443b40112e30f73",
+        "examples/support/mod.rs": "c52b65a377173b9717e605f104e38abee55b7ca7ec26a418c933953185a13336",
+        "scripts/bench.sh": "1c75743a9c499345612c2559d8b8766fc5ba614e66448f3e9e7dd1c1ee497ccd",
+        "scripts/preflight.sh": "e544c4c058d88be15850a98ee4807b9b2fababfceb11f694a18cf0072d5ecbd2",
+        "src/frame.rs": "8a5d26dfdc76af9c48ee00c14f6633f51b4e35961f1abb05fefc0ff0d1118561",
+        "src/lib.rs": "8563a5378de8ab4e6a7430e1653ac6f95cdab00b28401bb9d1abaedf8ab0d713",
+        "src/session.rs": "49efae84aabb62cc87f3c81537f71ea8d03496b6cc77f5ff11919e21c82cd371",
+        "src/session/receive_tests.rs": "d866d501e3d62dfc48fdd22e6df5c43400673ae2af5fb3b8b0e14b98c42cf852",
+        "src/stream.rs": "5471bf68d7e37a2e20ef24ce5441163a797ac7e886d5d4d5109a4f22d764a68e",
+        "src/yamux_shim.rs": "da0608751fc4ce7d26198b898fb6cc24e496a76244949937253346b32f9633ea",
+        "tests/activation.rs": "eefe64948a171ee50cf0872651e18b79cfec7ed4bd37bf8d0e87cf551b6870ff",
+        "tests/limits.rs": "2fa3be9b6b2d16b44928c05f9b132f7b662b36f4343705caf89c720a5c16399d",
+        "tests/protocol.rs": "501723ee55f6bfbab595524ff6eda46b4809396a36c59c0bbf6abf72968ae6b8",
+        "tests/sizing.rs": "f7c9a2f11937b337da397eac9b24e7415822a474c1b2dc7b157953c9acd71fd1",
+        "tests/support/mod.rs": "a667fa3bcdc4c0b889fc5cbc0f2e80e6f2bfbbeab6deed874f95ada45a955691",
+        "tests/vectored.rs": "26e7562fb949a3178572aeec3ab22d0053ef615aa0408f1c39e1716ecfba860f",
+        "tests/wire.rs": "7476c087ba7f963cdb8bf5daceecb518d90d1d8242785892f46b36b56060a970"
+      },
+      "source_sha256": "220c748bb4a6006f4cdd324a4306d5a819056bdc465c55a7531591042f87ca17"
+    }
+  },
+  "verification": {
+    "final_checks": "verification.json",
+    "measurement_build": "R: 41 core and 6 example tests passed; fmt passed. The measured CLI triggered a newer compiler lint; its borrowed flag-pair iteration was modernized after measurement. Final publication checks are recorded separately.",
+    "postmeasurement_rust_change": "examples/bench.rs::parse_workload: chunks_exact(2) -> as_chunks::<2>().0; argument-pair validation retained. Library and timed workload source unchanged."
+  }
+}

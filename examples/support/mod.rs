@@ -19,6 +19,32 @@ use tokio_util::compat::{Compat, FuturesAsyncReadCompatExt, TokioAsyncReadCompat
 pub const WINDOW: usize = 256 * 1024;
 pub const STREAM_CAP: usize = 64;
 pub const CHUNK: usize = 16 * 1024;
+pub const INTERACTIVE_PAYLOAD: usize = 64;
+// Exact distributions are bounded to 16 MiB of Duration samples across workers.
+pub const MAX_LATENCY_SAMPLES: usize = 1024 * 1024;
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum Scenario {
+    Uniform,
+    Mixed,
+}
+
+impl Scenario {
+    pub fn parse(value: &str) -> io::Result<Self> {
+        match value {
+            "uniform" => Ok(Self::Uniform),
+            "mixed" => Ok(Self::Mixed),
+            _ => Err(io::Error::other("scenario must be uniform or mixed")),
+        }
+    }
+
+    pub const fn name(self) -> &'static str {
+        match self {
+            Self::Uniform => "uniform",
+            Self::Mixed => "mixed",
+        }
+    }
+}
 
 #[derive(Clone, Copy, Debug)]
 pub enum Engine {
@@ -73,21 +99,79 @@ pub struct Workload {
     pub payload: usize,
     pub streams: usize,
     pub rounds: usize,
+    pub data_chunk: usize,
+    pub caller_chunk: usize,
+    pub scenario: Scenario,
+}
+
+impl Workload {
+    pub fn validate(self) -> io::Result<()> {
+        if self.streams == 0 || self.streams > STREAM_CAP || self.rounds == 0 {
+            return Err(io::Error::other(
+                "streams must be 1..=64 and rounds must be positive",
+            ));
+        }
+        if self.payload == 0 {
+            return Err(io::Error::other("payload must be positive"));
+        }
+        if !(1..=WINDOW).contains(&self.data_chunk) || !(1..=WINDOW).contains(&self.caller_chunk) {
+            return Err(io::Error::other(
+                "DATA and caller chunks must be 1..=262144",
+            ));
+        }
+        if self.scenario == Scenario::Mixed && self.streams < 2 {
+            return Err(io::Error::other(
+                "mixed requires one bulk and at least one interactive stream",
+            ));
+        }
+        if self.rounds > MAX_LATENCY_SAMPLES / self.streams {
+            return Err(io::Error::other(
+                "rounds exceed the per-worker exact latency sample budget",
+            ));
+        }
+        let requests = self
+            .streams
+            .checked_mul(self.rounds)
+            .ok_or_else(|| io::Error::other("request count overflows usize"))?;
+        checked_payload_bytes(self.payload, requests)?;
+        Ok(())
+    }
+}
+
+fn checked_payload_bytes(payload: usize, requests: usize) -> io::Result<u64> {
+    u64::try_from(payload)
+        .ok()
+        .and_then(|bytes| {
+            u64::try_from(requests)
+                .ok()
+                .and_then(|count| bytes.checked_mul(count))
+        })
+        .and_then(|bytes| bytes.checked_mul(2))
+        .ok_or_else(|| io::Error::other("payload byte count overflows u64"))
+}
+
+pub struct Distribution {
+    pub payload_bytes: u64,
+    pub latencies: Vec<Duration>,
+}
+
+impl Distribution {
+    /// Nearest-rank percentile of successful open-to-echo-EOF exchanges.
+    pub fn percentile_seconds(&self, percentile: usize) -> f64 {
+        let rank = (self.latencies.len() as u128 * percentile as u128).div_ceil(100);
+        self.latencies[(rank as usize).saturating_sub(1)].as_secs_f64()
+    }
 }
 
 pub struct Measurement {
     pub elapsed: Duration,
     pub payload_bytes: u64,
     pub requests: usize,
-    pub latencies: Vec<Duration>,
-}
-
-impl Measurement {
-    /// Nearest-rank percentile of successful open-to-echo-EOF exchanges.
-    pub fn percentile_seconds(&self, percentile: usize) -> f64 {
-        let rank = (self.latencies.len() as u128 * percentile as u128).div_ceil(100);
-        self.latencies[(rank as usize).saturating_sub(1)].as_secs_f64()
-    }
+    pub uniform: Option<Distribution>,
+    pub interactive: Option<Distribution>,
+    pub bulk: Option<Distribution>,
+    pub interactive_requests_completed_during_bulk: usize,
+    pub bulk_elapsed: Option<Duration>,
 }
 
 enum Stream {
@@ -141,12 +225,13 @@ enum Connection<I> {
 }
 
 impl<I: AsyncRead + AsyncWrite + Unpin> Connection<I> {
-    fn new(io: I, engine: Engine, client: bool) -> Self {
+    fn new(io: I, engine: Engine, client: bool, data_chunk: usize) -> Self {
         match engine {
             Engine::Veyrmux => {
                 let mut config = veyrmux::Config::default();
                 config.set_max_num_streams(STREAM_CAP);
                 config.set_max_connection_receive_window(Some(STREAM_CAP * WINDOW));
+                config.set_split_send_size(data_chunk);
                 Self::Native(veyrmux::Connection::new(
                     io,
                     config,
@@ -163,7 +248,7 @@ impl<I: AsyncRead + AsyncWrite + Unpin> Connection<I> {
                 // Stock reserves the default credit for *every configured stream*.
                 // No excess connection budget means auto-tuning cannot grow a window.
                 config.set_max_connection_receive_window(Some(STREAM_CAP * WINDOW));
-                config.set_split_send_size(CHUNK);
+                config.set_split_send_size(data_chunk);
                 Self::Stock(yamux::Connection::new(
                     io.compat(),
                     config,
@@ -287,8 +372,21 @@ where
     (Opener(commands), receiver, Driver(task))
 }
 
-async fn echo(mut stream: Stream) -> io::Result<()> {
-    let mut scratch = [0_u8; CHUNK];
+async fn echo(mut stream: Stream, mut scratch: Vec<u8>) -> io::Result<Vec<u8>> {
+    loop {
+        let count = stream.read(&mut scratch).await?;
+        if count == 0 {
+            stream.shutdown().await?;
+            return Ok(scratch);
+        }
+        stream.write_all(&scratch[..count]).await?;
+    }
+}
+
+async fn echo_uniform(mut stream: Stream, caller_chunk: usize) -> io::Result<()> {
+    // One dynamic allocation per echo worker, reused for every chunk in its stream.
+    // Keep scratch owned by the worker and drop it at completion, not at JoinSet reap.
+    let mut scratch = vec![0_u8; caller_chunk];
     loop {
         let count = stream.read(&mut scratch).await?;
         if count == 0 {
@@ -343,24 +441,12 @@ async fn exchange(
 }
 
 pub async fn measure(workload: Workload) -> io::Result<Measurement> {
-    if workload.streams == 0 || workload.streams > STREAM_CAP || workload.rounds == 0 {
-        return Err(io::Error::other(
-            "streams must be 1..=64 and rounds must be positive",
-        ));
-    }
-    let requests = workload
-        .streams
-        .checked_mul(workload.rounds)
-        .ok_or_else(|| io::Error::other("request count overflows usize"))?;
-    let payload_bytes = (workload.payload as u64)
-        .checked_mul(requests as u64)
-        .and_then(|bytes| bytes.checked_mul(2))
-        .ok_or_else(|| io::Error::other("payload byte count overflows u64"))?;
+    workload.validate()?;
     tokio::time::timeout(Duration::from_secs(30), async {
-        let mut result = match workload.transport {
+        match workload.transport {
             Transport::Duplex => {
                 let (client, server) = tokio::io::duplex(64 * 1024);
-                run_pair(client, server, workload, requests).await?
+                run_pair(client, server, workload).await
             }
             Transport::Tcp => {
                 let listener = TcpListener::bind((std::net::Ipv4Addr::LOCALHOST, 0)).await?;
@@ -368,11 +454,9 @@ pub async fn measure(workload: Workload) -> io::Result<Measurement> {
                 let (client, (server, _)) = tokio::try_join!(connect, listener.accept())?;
                 client.set_nodelay(true)?;
                 server.set_nodelay(true)?;
-                run_pair(client, server, workload, requests).await?
+                run_pair(client, server, workload).await
             }
-        };
-        result.payload_bytes = payload_bytes;
-        Ok(result)
+        }
     })
     .await
     .map_err(|_| {
@@ -383,80 +467,203 @@ pub async fn measure(workload: Workload) -> io::Result<Measurement> {
     })?
 }
 
-async fn run_pair<I>(
-    client: I,
-    server: I,
-    workload: Workload,
-    requests: usize,
-) -> io::Result<Measurement>
+async fn run_pair<I>(client: I, server: I, workload: Workload) -> io::Result<Measurement>
 where
     I: AsyncRead + AsyncWrite + Unpin + Send + 'static,
 {
-    let (opener, _client_inbound, _client_driver) =
-        drive(Connection::new(client, workload.engine, true));
-    let (_server_opener, mut incoming, _server_driver) =
-        drive(Connection::new(server, workload.engine, false));
-    // JoinSet aborts all echo workers if an error or timeout cancels this run.
+    let (opener, _client_inbound, _client_driver) = drive(Connection::new(
+        client,
+        workload.engine,
+        true,
+        workload.data_chunk,
+    ));
+    let (_server_opener, mut incoming, _server_driver) = drive(Connection::new(
+        server,
+        workload.engine,
+        false,
+        workload.data_chunk,
+    ));
+    // Both JoinSets abort their workers on error/cancel; Driver aborts the pumps.
+    let (stop_server, mut stopped) = oneshot::channel();
     let mut servers = JoinSet::new();
-    servers.spawn(async move {
-        let mut echoes = JoinSet::new();
-        for _ in 0..=requests {
-            let stream = incoming
-                .recv()
-                .await
-                .ok_or_else(|| io::Error::other("server connection ended early"))??;
-            echoes.spawn(echo(stream));
-            while let Some(result) = echoes.try_join_next() {
+    if workload.scenario == Scenario::Uniform {
+        let requests = workload
+            .streams
+            .checked_mul(workload.rounds)
+            .ok_or_else(|| io::Error::other("request count overflows usize"))?;
+        servers.spawn(async move {
+            let mut echoes = JoinSet::new();
+            // Match the uniform receive/spawn/lazy-reap lifecycle, including warmup.
+            for _ in 0..=requests {
+                let stream = incoming
+                    .recv()
+                    .await
+                    .ok_or_else(|| io::Error::other("server connection ended early"))??;
+                echoes.spawn(echo_uniform(stream, workload.caller_chunk));
+                while let Some(result) = echoes.try_join_next() {
+                    result.map_err(io::Error::other)??;
+                }
+            }
+            while let Some(result) = echoes.join_next().await {
                 result.map_err(io::Error::other)??;
             }
-        }
-        while let Some(result) = echoes.join_next().await {
-            result.map_err(io::Error::other)??;
-        }
-        Ok::<(), io::Error>(())
-    });
+            Ok::<(), io::Error>(())
+        });
+    } else {
+        // Mixed work has no predetermined request count; retain its existing dispatcher.
+        let mut buffers: Vec<_> = (0..workload.streams)
+            .map(|_| vec![0_u8; workload.caller_chunk])
+            .collect();
+        servers.spawn(async move {
+            let mut echoes = JoinSet::new();
+            loop {
+                tokio::select! {
+                    biased;
+                    result = echoes.join_next(), if !echoes.is_empty() => {
+                        let buffer = result.ok_or_else(|| io::Error::other("echo worker disappeared"))?
+                            .map_err(io::Error::other)??;
+                        buffers.push(buffer);
+                    }
+                    _ = &mut stopped => break,
+                    stream = incoming.recv(), if !buffers.is_empty() => {
+                        let stream = stream
+                            .ok_or_else(|| io::Error::other("server connection ended early"))??;
+                        let scratch = buffers.pop()
+                            .ok_or_else(|| io::Error::other("echo scratch pool exhausted"))?;
+                        echoes.spawn(echo(stream, scratch));
+                    }
+                }
+            }
+            while let Some(result) = echoes.join_next().await {
+                result.map_err(io::Error::other)??;
+            }
+            Ok::<(), io::Error>(())
+        });
+    }
 
-    let warm_pattern = [0x5a; CHUNK];
-    let mut warm_scratch = [0_u8; CHUNK];
+    let warm_pattern = vec![0x5a; workload.caller_chunk];
+    let mut warm_scratch = vec![0_u8; workload.caller_chunk];
     exchange(&opener, 4096, &warm_pattern, &mut warm_scratch).await?;
 
     let start_gate = std::sync::Arc::new(Barrier::new(workload.streams + 1));
     let round_gate = std::sync::Arc::new(Barrier::new(workload.streams));
+    let (bulk_done, _) = tokio::sync::watch::channel(false);
     let mut clients = JoinSet::new();
     for worker in 0..workload.streams {
         let opener = opener.clone();
         let start_gate = start_gate.clone();
         let round_gate = round_gate.clone();
-        // One prefilled pattern and fixed scratch per worker, reused across rounds.
-        let pattern: Vec<u8> = (0..CHUNK)
+        let bulk_done = bulk_done.clone();
+        let completion = bulk_done.subscribe();
+        let interactive = workload.scenario == Scenario::Mixed && worker != 0;
+        let payload = if interactive {
+            INTERACTIVE_PAYLOAD
+        } else {
+            workload.payload
+        };
+        // One pattern/scratch pair per client, reused across all fresh-stream requests.
+        let pattern: Vec<u8> = (0..workload.caller_chunk)
             .map(|index| (index as u8).wrapping_mul(31).wrapping_add(worker as u8))
             .collect();
-        let mut scratch = vec![0_u8; CHUNK];
-        let mut latencies = Vec::with_capacity(workload.rounds);
+        let mut scratch = vec![0_u8; workload.caller_chunk];
+        let sample_limit = MAX_LATENCY_SAMPLES / workload.streams;
+        let mut latencies = Vec::with_capacity(if interactive {
+            sample_limit
+        } else {
+            workload.rounds
+        });
+        let mut completed_during_bulk = 0_usize;
         clients.spawn(async move {
             start_gate.wait().await;
-            for _ in 0..workload.rounds {
-                latencies.push(exchange(&opener, workload.payload, &pattern, &mut scratch).await?);
-                round_gate.wait().await;
+            let started = Instant::now();
+            loop {
+                if latencies.len() == sample_limit {
+                    return Err(io::Error::other("exact latency sample budget exhausted"));
+                }
+                latencies.push(exchange(&opener, payload, &pattern, &mut scratch).await?);
+                if workload.scenario == Scenario::Uniform {
+                    round_gate.wait().await;
+                    if latencies.len() == workload.rounds {
+                        break;
+                    }
+                } else if interactive {
+                    // Never cancel an in-flight request when the bulk worker finishes.
+                    if *completion.borrow() {
+                        break;
+                    }
+                    completed_during_bulk += 1;
+                } else if latencies.len() == workload.rounds {
+                    bulk_done.send_replace(true);
+                    break;
+                }
             }
-            Ok::<_, io::Error>(latencies)
+            Ok::<_, io::Error>((
+                interactive,
+                completed_during_bulk,
+                started.elapsed(),
+                Distribution {
+                    payload_bytes: checked_payload_bytes(payload, latencies.len())?,
+                    latencies,
+                },
+            ))
         });
     }
-    let mut latencies = Vec::with_capacity(requests);
+    let mut result = Measurement {
+        elapsed: Duration::ZERO,
+        payload_bytes: 0,
+        requests: 0,
+        uniform: None,
+        interactive: None,
+        bulk: None,
+        bulk_elapsed: None,
+        interactive_requests_completed_during_bulk: 0,
+    };
     let started = Instant::now();
     start_gate.wait().await;
-    while let Some(result) = clients.join_next().await {
-        latencies.extend(result.map_err(io::Error::other)??);
+    while let Some(client) = clients.join_next().await {
+        let (interactive, overlap_count, elapsed, distribution) =
+            client.map_err(io::Error::other)??;
+        result.interactive_requests_completed_during_bulk += overlap_count;
+        result.payload_bytes = result
+            .payload_bytes
+            .checked_add(distribution.payload_bytes)
+            .ok_or_else(|| io::Error::other("actual payload byte count overflows u64"))?;
+        result.requests = result
+            .requests
+            .checked_add(distribution.latencies.len())
+            .ok_or_else(|| io::Error::other("actual request count overflows usize"))?;
+        let class = if workload.scenario == Scenario::Uniform {
+            &mut result.uniform
+        } else if interactive {
+            &mut result.interactive
+        } else {
+            result.bulk_elapsed = Some(elapsed);
+            &mut result.bulk
+        };
+        if let Some(class) = class {
+            class.payload_bytes = class
+                .payload_bytes
+                .checked_add(distribution.payload_bytes)
+                .ok_or_else(|| io::Error::other("class byte count overflows u64"))?;
+            class.latencies.extend(distribution.latencies);
+        } else {
+            *class = Some(distribution);
+        }
     }
-    while let Some(result) = servers.join_next().await {
-        result.map_err(io::Error::other)??;
+    let _undelivered = stop_server.send(());
+    while let Some(server) = servers.join_next().await {
+        server.map_err(io::Error::other)??;
     }
-    let elapsed = started.elapsed();
-    latencies.sort_unstable();
-    Ok(Measurement {
-        elapsed,
-        payload_bytes: 0,
-        requests,
-        latencies,
-    })
+    result.elapsed = started.elapsed();
+    for class in [
+        &mut result.uniform,
+        &mut result.interactive,
+        &mut result.bulk,
+    ]
+    .into_iter()
+    .flatten()
+    {
+        class.latencies.sort_unstable();
+    }
+    Ok(result)
 }
